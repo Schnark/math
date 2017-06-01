@@ -1,0 +1,41 @@
+@keyframes blink {
+	0% {
+		border-color: black;
+	}
+	49% {
+		border-color: black;
+	}
+	50% {
+		border-color: transparent;
+	}
+	99% {
+		border-color: transparent;
+	}
+	100% {
+		border-color: black;
+	}
+}
+
+.cursor {
+	border-left: 1px solid black;
+	animation: blink linear 2.5s infinite;
+}
+
+#input {
+	margin: 5px;
+	padding: 2px 0.5em;
+	border: 1px solid #aaa;
+	border-radius: 2px;
+	background-color: #eee;
+	color: black;
+	white-space: pre;
+	overflow: auto;
+}
+
+.inactive .cursor {
+	visibility: hidden;
+}
+
+#input.active {
+	border-color: #99b;
+}

@@ -1,0 +1,16 @@
+{
+	"@comment": "Note that the code to transform these data into a webpage is in https://github.com/Schnark/schnark.github.io",
+	"title": {
+		"en": "Calculator – App for Firefox OS",
+		"de": "Calculator – Taschenrechner-App für Firefox OS"
+	},
+	"serviceworker": true,
+	"icon": "res/icon-128.png",
+	"screenshots": [
+		"screenshot.png"
+	],
+	"desc": {
+		"en": ["This is an advanced calculator. It has an integrated virtual keyboard that allows you to enter complex formulas. It supports a great variety of scientific functions, unit conversion and other features."],
+		"de": ["Dies ist ein fortgeschrittener Taschenrechner. Er hat eine integrierte virtuelle Tastatur, die die Eingabe komplexer Formeln ermöglicht. Unterstützt wird eine Vielzahl wissenschaftlicher Funktionen, das Umrechnen von Einheiten und weitere Funktionen."]
+	}
+}

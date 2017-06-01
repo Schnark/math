@@ -1,0 +1,68 @@
+#keyboard {
+	max-width: 24em;
+	margin: auto;
+}
+
+.keyboard-head {
+	overflow: hidden;
+}
+
+.keyboard-page > * {
+	display: block;
+	border: 2px outset black;
+	text-align: center;
+	float: left;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	font-size: inherit;
+	width: 20%;
+	height: 3em;
+	line-height: 3em;
+	overflow: hidden;
+}
+
+.keyboard-page > button {
+	background-color: #aaa;
+}
+
+.keyboard-page > .nav {
+	background-color: #88f;
+}
+
+.keyboard-page > .destructive {
+	background-color: #f88;
+}
+
+.keyboard-page > .constructive {
+	background-color: #8f8;
+}
+
+.keyboard-page > span {
+	background-color: #555;
+	visibility: hidden;
+}
+
+.keyboard-page > .select {
+	position: relative;
+}
+
+.keyboard-page > .select label,
+.keyboard-page > .select select {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.keyboard-page > .select label {
+	z-index: 1;
+	background-color: #f8f;
+	pointer-events: none;
+}
+
+.keyboard-page > input {
+	position: absolute;
+	top: 0;
+	left: -99999em;
+}

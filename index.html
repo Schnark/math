@@ -1,0 +1,775 @@
+<!DOCTYPE HTML>
+<html><head><title>Calculator</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+<link rel="manifest" href="icons/manifest.json">
+<link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="icons/favicon.ico">
+<meta name="msapplication-config" content="icons/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<script>
+if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installPackage)) {
+	navigator.serviceWorker.register('sw.js');
+}
+</script>
+<script src="res/input.js"></script>
+<script src="res/keyboard.js"></script>
+<script src="res/lib/math.min.js"></script>
+<link rel="stylesheet" href="res/app.css">
+<link rel="stylesheet" href="res/input.css">
+<link rel="stylesheet" href="res/keyboard.css">
+</head><body>
+<div id="log-area"><div>
+<dl id="log"></dl>
+</div></div>
+<div id="input-area">
+<div id="input"></div>
+<div id="keyboard">
+<div class="keyboard-page"><!--0-->
+<button data-key="page" data-val="1" class="nav">⇧</button>
+<button data-key="cursor" data-val="left" class="nav">←</button>
+<button data-key="cursor" data-val="right" class="nav">→</button>
+<button data-key="exec" data-val="del" class="destructive">⌫</button>
+<button data-key="exec" data-val="enter" class="constructive">⏎</button>
+
+<button data-key="insert" data-val="7">7</button>
+<button data-key="insert" data-val="8">8</button>
+<button data-key="insert" data-val="9">9</button>
+<button data-key="insert" data-val="(">(</button>
+<button data-key="insert" data-val=")">)</button>
+
+<button data-key="insert" data-val="4">4</button>
+<button data-key="insert" data-val="5">5</button>
+<button data-key="insert" data-val="6">6</button>
+<button data-key="insert" data-val="+">+</button>
+<button data-key="insert" data-val="-">-</button>
+
+<button data-key="insert" data-val="1">1</button>
+<button data-key="insert" data-val="2">2</button>
+<button data-key="insert" data-val="3">3</button>
+<button data-key="insert" data-val="*">*</button>
+<button data-key="insert" data-val="/">/</button>
+
+<button data-key="insert" data-val="0">0</button>
+<button data-key="insert" data-val=".">.</button>
+<button data-key="insert" data-val="e">e</button>
+<button data-key="insert" data-val="ans">ans</button>
+<button data-key="exec" data-val="prev" class="destructive">↑</button>
+</div>
+
+<div class="keyboard-page"><!--1-->
+<button data-key="page" data-val="0" class="nav">⬆</button>
+<button data-key="cursor" data-val="start" class="nav">⇤</button>
+<button data-key="cursor" data-val="end" class="nav">⇥</button>
+<button data-key="exec" data-val="clear" class="destructive">⌧</button>
+<button data-key="exec" data-val="enter" class="constructive">⏎</button>
+
+<button data-key="page" data-val="2" class="nav">f()</button>
+<button data-key="page" data-val="4" class="nav">[,]</button>
+<button data-key="insert" data-val="pi">π</button>
+<button data-key="insert" data-val="[">[</button>
+<button data-key="insert" data-val="]">]</button>
+
+<button data-key="page" data-val="6" class="nav">#</button>
+<button data-key="page" data-val="8" class="nav">~ &amp; |</button>
+<button data-key="insert" data-val="i">i</button>
+<button data-key="insert" data-val=",">,</button>
+<button data-key="insert" data-val=";">;</button>
+
+<button data-key="page" data-val="10" class="nav">abc</button>
+<button data-key="page" data-val="12" class="nav">km/h</button>
+<button data-key="insert" data-val="phi">φ</button>
+<button data-key="insert" data-val="^">^</button>
+<button data-key="insert" data-val=":">:</button>
+
+<button data-key="page" data-val="14" class="nav">⌨</button>
+<button data-key="insert" data-val="=">=</button>
+<button data-key="insert" data-val="e">e</button>
+<button data-key="insert" data-val="&quot;">&quot;</button>
+<button data-key="exec" data-val="next" class="destructive">↓</button>
+</div>
+
+<div class="keyboard-page"><!--2-->
+<button data-key="page" data-val="3" class="nav">⇧</button>
+<button data-key="cursor" data-val="left" class="nav">←</button>
+<button data-key="cursor" data-val="right" class="nav">→</button>
+<button data-key="exec" data-val="del" class="destructive">⌫</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<button data-key="insert" data-val="abs(&#x1b;)">abs</button>
+<button data-key="insert" data-val="sqrt(&#x1b;)">sqrt</button>
+<button data-key="insert" data-val="sin(&#x1b;)">sin</button>
+<div class="select"><label for="select-cos">cos/…</label>
+<select id="select-cos"><option>cos/…</option>
+<option data-key="insert" data-val="sin(&#x1b;)">sin</option>
+<option data-key="insert" data-val="cos(&#x1b;)">cos</option>
+<option data-key="insert" data-val="tan(&#x1b;)">tan</option>
+<option data-key="insert" data-val="cot(&#x1b;)">cot</option>
+<option data-key="insert" data-val="sec(&#x1b;)">sec</option>
+<option data-key="insert" data-val="csc(&#x1b;)">csc</option>
+</select></div>
+<div class="select"><label for="select-sinh">sinh/…</label>
+<select id="select-sinh"><option>sinh/…</option>
+<option data-key="insert" data-val="sinh(&#x1b;)">sinh</option>
+<option data-key="insert" data-val="cosh(&#x1b;)">cosh</option>
+<option data-key="insert" data-val="tanh(&#x1b;)">tanh</option>
+<option data-key="insert" data-val="coth(&#x1b;)">coth</option>
+<option data-key="insert" data-val="sech(&#x1b;)">sech</option>
+<option data-key="insert" data-val="csch(&#x1b;)">csch</option>
+</select></div>
+
+<button data-key="insert" data-val="log(&#x1b;)">log</button>
+<button data-key="insert" data-val="floor(&#x1b;)">floor</button>
+<button data-key="insert" data-val="ceil(&#x1b;)">ceil</button>
+<button data-key="insert" data-val="round(&#x1b;)">round</button>
+<button data-key="insert" data-val="fix(&#x1b;)">fix</button>
+
+<button data-key="insert" data-val="%">%</button>
+<button data-key="insert" data-val="gcd(&#x1b;,)">gcd</button>
+<button data-key="insert" data-val="xgcd(&#x1b;,)">xgcd</button>
+<button data-key="insert" data-val="lcm(&#x1b;,)">lcm</button>
+<button data-key="insert" data-val="isPrime(&#x1b;)">isPrime</button>
+
+<button data-key="insert" data-val="conj(&#x1b;)">conj</button>
+<button data-key="insert" data-val="re(&#x1b;)">re</button>
+<button data-key="insert" data-val="im(&#x1b;)">im</button>
+<button data-key="insert" data-val="arg(&#x1b;)">arg</button>
+<button data-key="insert" data-val=",">,</button>
+</div>
+
+<div class="keyboard-page"><!--3-->
+<button data-key="page" data-val="2" class="nav">⬆</button>
+<button data-key="cursor" data-val="start" class="nav">⇤</button>
+<button data-key="cursor" data-val="end" class="nav">⇥</button>
+<button data-key="exec" data-val="clear" class="destructive">⌧</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<button data-key="insert" data-val="sign(&#x1b;)">sign</button>
+<button data-key="insert" data-val="nthRoot(&#x1b;,)">nthRoot</button>
+<button data-key="insert" data-val="asin(&#x1b;)">asin</button>
+<div class="select"><label for="select-acos">acos/…</label>
+<select id="select-acos"><option>acos/…</option>
+<option data-key="insert" data-val="asin(&#x1b;)">asin</option>
+<option data-key="insert" data-val="acos(&#x1b;)">acos</option>
+<option data-key="insert" data-val="atan(&#x1b;)">atan</option>
+<option data-key="insert" data-val="atan2(&#x1b;,)">atan2</option>
+<option data-key="insert" data-val="acot(&#x1b;)">acot</option>
+<option data-key="insert" data-val="asec(&#x1b;)">asec</option>
+<option data-key="insert" data-val="acsc(&#x1b;)">acsc</option>
+</select></div>
+<div class="select"><label for="select-asinh">asinh/…</label>
+<select id="select-asinh"><option>asinh/…</option>
+<option data-key="insert" data-val="asinh(&#x1b;)">asinh</option>
+<option data-key="insert" data-val="acosh(&#x1b;)">acosh</option>
+<option data-key="insert" data-val="atanh(&#x1b;)">atanh</option>
+<option data-key="insert" data-val="acoth(&#x1b;)">acoth</option>
+<option data-key="insert" data-val="asech(&#x1b;)">asech</option>
+<option data-key="insert" data-val="acsch(&#x1b;)">acsch</option>
+</select></div>
+
+<button data-key="insert" data-val="exp(&#x1b;)">exp</button>
+<button data-key="insert" data-val="log10(&#x1b;)">log10</button>
+<button data-key="insert" data-val="square(&#x1b;)">square</button>
+<button data-key="insert" data-val="cube(&#x1b;)">cube</button>
+<button data-key="insert" data-val="cbrt(&#x1b;)">cbrt</button>
+
+<button data-key="insert" data-val="simplify(&quot;&#x1b;&quot;)">simplify</button>
+<button data-key="insert" data-val="derivative(&quot;&#x1b;&quot;,&quot;x&quot;)">deriv</button>
+<button data-key="insert" data-val="x">x</button>
+<span>4</span>
+<span>5</span>
+
+<button data-key="insert" data-val="fraction(&#x1b;)">fraction</button>
+<button data-key="insert" data-val="bignumber(&quot;&#x1b;&quot;)">big</button>
+<button data-key="insert" data-val="number(&quot;&#x1b;&quot;)">number</button>
+<button data-key="insert" data-val="about()">about</button>
+<button data-key="insert" data-val="help(&quot;&#x1b;&quot;)">help</button>
+</div>
+
+<div class="keyboard-page"><!--4-->
+<button data-key="page" data-val="5" class="nav">⇧</button>
+<button data-key="cursor" data-val="left" class="nav">←</button>
+<button data-key="cursor" data-val="right" class="nav">→</button>
+<button data-key="exec" data-val="del" class="destructive">⌫</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<button data-key="insert" data-val="inv(&#x1b;)">inv</button>
+<button data-key="insert" data-val="det(&#x1b;)">det</button>
+<button data-key="insert" data-val="dot(&#x1b;,)">dot</button>
+<button data-key="insert" data-val="[">[</button>
+<button data-key="insert" data-val="]">]</button>
+
+<button data-key="insert" data-val="eye(&#x1b;)">eye</button>
+<button data-key="insert" data-val="zeros(&#x1b;)">zeros</button>
+<button data-key="insert" data-val="kron(&#x1b;,)">kron</button>
+<button data-key="insert" data-val=".^">.^</button>
+<button data-key="insert" data-val=",">,</button>
+
+<button data-key="insert" data-val="norm(&#x1b;,2)">norm</button>
+<button data-key="insert" data-val="hypot(&#x1b;)">hypot</button>
+<div class="select"><label for="select-lusolve">solve/…</label>
+<select id="select-lusolve"><option>lusolve/…</option>
+<option data-key="insert" data-val="lusolve(&#x1b;,)">lusolve</option>
+<option data-key="insert" data-val="lsolve(&#x1b;,)">lsolve</option>
+<option data-key="insert" data-val="usolve(&#x1b;,)">usolve</option>
+<option data-key="insert" data-val="lup(&#x1b;)">lup</option>
+<option data-key="insert" data-val="slu(&#x1b;,,)">slu</option>
+</select></div>
+<button data-key="insert" data-val=".*">.*</button>
+<button data-key="insert" data-val="./">./</button>
+
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<button data-key="insert" data-val=";">;</button>
+<button data-key="insert" data-val=":">:</button>
+</div>
+
+<div class="keyboard-page"><!--5-->
+<button data-key="page" data-val="4" class="nav">⬆</button>
+<button data-key="cursor" data-val="start" class="nav">⇤</button>
+<button data-key="cursor" data-val="end" class="nav">⇥</button>
+<button data-key="exec" data-val="clear" class="destructive">⌧</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<button data-key="insert" data-val="transpose(&#x1b;)">trnsps</button>
+<button data-key="insert" data-val="trace(&#x1b;)">trace</button>
+<button data-key="insert" data-val="cross(&#x1b;,)">cross</button>
+<button data-key="insert" data-val="range(&#x1b;,)">range</button>
+<button data-key="insert" data-val="partitionSelect(&#x1b;,)">prtnSlct</button>
+
+<button data-key="insert" data-val="diag(&#x1b;)">diag</button>
+<button data-key="insert" data-val="ones(&#x1b;,)">ones</button>
+<button data-key="insert" data-val="size(&#x1b;)">size</button>
+<button data-key="insert" data-val="resize(&#x1b;,)">resize</button>
+<button data-key="insert" data-val="reshape(&#x1b;,)">reshape</button>
+
+<button data-key="insert" data-val="distance(&#x1b;)">distance</button>
+<button data-key="insert" data-val="intersect(&#x1b;,,)">intersect</button>
+<button data-key="insert" data-val="flatten(&#x1b;)">flatten</button>
+<button data-key="insert" data-val="squeeze(&#x1b;)">squeeze</button>
+<button data-key="insert" data-val="sort(&#x1b;)">sort</button>
+
+<button data-key="insert" data-val="concat(&#x1b;,)">concat</button>
+<button data-key="insert" data-val="subset(&#x1b;,)">subset</button>
+<button data-key="insert" data-val="filter(&#x1b;,)">filter</button>
+<button data-key="insert" data-val="map(&#x1b;,)">map</button>
+<button data-key="insert" data-val="forEach(&#x1b;,)">forEach</button>
+</div>
+
+<div class="keyboard-page"><!--6-->
+<button data-key="page" data-val="7" class="nav">⇧</button>
+<button data-key="cursor" data-val="left" class="nav">←</button>
+<button data-key="cursor" data-val="right" class="nav">→</button>
+<button data-key="exec" data-val="del" class="destructive">⌫</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<button data-key="insert" data-val="mean(&#x1b;)">mean</button>
+<button data-key="insert" data-val="median(&#x1b;)">median</button>
+<button data-key="insert" data-val="quantileSeq(&#x1b;,)">qntlSeq</button>
+<button data-key="insert" data-val="var(&#x1b;)">var</button>
+<button data-key="insert" data-val="std(&#x1b;)">std</button>
+
+<button data-key="insert" data-val="min(&#x1b;)">min</button>
+<button data-key="insert" data-val="max(&#x1b;)">max</button>
+<button data-key="insert" data-val="mad(&#x1b;)">mad</button>
+<button data-key="insert" data-val="mode(&#x1b;)">mode</button>
+<span>5</span>
+
+<button data-key="insert" data-val="sum(&#x1b;)">sum</button>
+<button data-key="insert" data-val="prod(&#x1b;)">prod</button>
+<button data-key="insert" data-val="random()">random</button>
+<button data-key="insert" data-val="randomInt(&#x1b;)">randInt</button>
+<button data-key="insert" data-val="pickRandom([&#x1b;,])">pickRnd</button>
+
+<button data-key="insert" data-val="!">!</button>
+<button data-key="insert" data-val="gamma(&#x1b;)">gamma</button>
+<button data-key="insert" data-val="combinations(&#x1b;,)">comb</button>
+<button data-key="insert" data-val="permutations(&#x1b;)">perm</button>
+<button data-key="insert" data-val="multinomial([&#x1b;,])">multnom</button>
+</div>
+
+<div class="keyboard-page"><!--7-->
+<button data-key="page" data-val="6" class="nav">⬆</button>
+<button data-key="cursor" data-val="start" class="nav">⇤</button>
+<button data-key="cursor" data-val="end" class="nav">⇥</button>
+<button data-key="exec" data-val="clear" class="destructive">⌧</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<button data-key="insert" data-val="composition(&#x1b;,)">comp</button>
+<button data-key="insert" data-val="catalan(&#x1b;)">catalan</button>
+<button data-key="insert" data-val="bellNumbers(&#x1b;)">bell</button>
+<button data-key="insert" data-val="stirlingS2(&#x1b;,)">stirling</button>
+<span>5</span>
+
+<button data-key="insert" data-val="kldivergence(&#x1b;,)">kldiverg</button>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+
+<button data-key="insert" data-val="erf(&#x1b;)">erf</button>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+</div>
+
+<div class="keyboard-page"><!--8-->
+<button data-key="page" data-val="9" class="nav">⇧</button>
+<button data-key="cursor" data-val="left" class="nav">←</button>
+<button data-key="cursor" data-val="right" class="nav">→</button>
+<button data-key="exec" data-val="del" class="destructive">⌫</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<button data-key="insert" data-val="==">==</button>
+<button data-key="insert" data-val="!=">!=</button>
+<button data-key="insert" data-val="deepEqual(&#x1b;,)">deepEq</button>
+<button data-key="insert" data-val="&lt;">&lt;</button>
+<button data-key="insert" data-val="&gt;">&gt;</button>
+
+<button data-key="insert" data-val="&lt;=">&lt;=</button>
+<button data-key="insert" data-val="&gt;=">&gt;=</button>
+<button data-key="insert" data-val="compare(&#x1b;,)">compare</button>
+<button data-key="insert" data-val=" or ">or</button>
+<button data-key="insert" data-val="not ">not</button>
+
+<div class="select"><label for="select-isFoo">isFoo/…</label>
+<select id="select-isFoo"><option>isFoo/…</option>
+<option data-key="insert" data-val="isPositive(&#x1b;)">isPositive</option>
+<option data-key="insert" data-val="isZero(&#x1b;)">isZero</option>
+<option data-key="insert" data-val="isNegative(&#x1b;)">isNegative</option>
+<option data-key="insert" data-val="isNumeric(&#x1b;)">isNumeric</option>
+<option data-key="insert" data-val="isInteger(&#x1b;)">isInteger</option>
+<option data-key="insert" data-val="isNaN(&#x1b;)">isNaN</option>
+</select></div>
+<button data-key="insert" data-val="typeof(&#x1b;)">typeof</button>
+<span>3</span>
+<button data-key="insert" data-val=" and ">and</button>
+<button data-key="insert" data-val=" xor ">xor</button>
+</div>
+
+<div class="keyboard-page"><!--9-->
+<button data-key="page" data-val="8" class="nav">⬆</button>
+<button data-key="cursor" data-val="start" class="nav">⇤</button>
+<button data-key="cursor" data-val="end" class="nav">⇥</button>
+<button data-key="exec" data-val="clear" class="destructive">⌧</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<span>1</span>
+<span>2</span>
+<button data-key="insert" data-val="&gt;&gt;&gt;">&gt;&gt;&gt;</button>
+<button data-key="insert" data-val="&lt;&lt;">&lt;&lt;</button>
+<button data-key="insert" data-val="&gt;&gt;">&gt;&gt;</button>
+
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<button data-key="insert" data-val="|">|</button>
+<button data-key="insert" data-val="~">~</button>
+
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<button data-key="insert" data-val="&amp;">&amp;</button>
+<button data-key="insert" data-val="^">^</button>
+</div>
+
+<div class="keyboard-page"><!--10-->
+<button data-key="page" data-val="11" class="nav">⇧</button>
+<button data-key="cursor" data-val="left" class="nav">←</button>
+<button data-key="cursor" data-val="right" class="nav">→</button>
+<button data-key="exec" data-val="del" class="destructive">⌫</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<button data-key="insert" data-val="a">a</button>
+<button data-key="insert" data-val="b">b</button>
+<button data-key="insert" data-val="c">c</button>
+<button data-key="insert" data-val="d">d</button>
+<button data-key="insert" data-val="e">e</button>
+
+<button data-key="insert" data-val="f">f</button>
+<button data-key="insert" data-val="g">g</button>
+<button data-key="insert" data-val="h">h</button>
+<button data-key="insert" data-val="i">i</button>
+<button data-key="insert" data-val="j">j</button>
+
+<button data-key="insert" data-val="k">k</button>
+<button data-key="insert" data-val="l">l</button>
+<button data-key="insert" data-val="m">m</button>
+<button data-key="insert" data-val="n">n</button>
+<button data-key="insert" data-val="o">o</button>
+
+<button data-key="insert" data-val="p">p</button>
+<button data-key="insert" data-val="q">q</button>
+<button data-key="insert" data-val="r">r</button>
+<button data-key="insert" data-val="s">s</button>
+<button data-key="insert" data-val="t">t</button>
+
+<button data-key="insert" data-val="u">u</button>
+<button data-key="insert" data-val="v">v</button>
+<button data-key="insert" data-val="w">w</button>
+<button data-key="insert" data-val="x">x</button>
+<button data-key="insert" data-val="y">y</button>
+
+<button data-key="insert" data-val="z">z</button>
+<button data-key="insert" data-val=".">.</button>
+<button data-key="insert" data-val=",">,</button>
+<button data-key="insert" data-val="(">(</button>
+<button data-key="insert" data-val=" ">␣</button>
+</div>
+
+<div class="keyboard-page"><!--11-->
+<button data-key="page" data-val="10" class="nav">⬆</button>
+<button data-key="cursor" data-val="start" class="nav">⇤</button>
+<button data-key="cursor" data-val="end" class="nav">⇥</button>
+<button data-key="exec" data-val="clear" class="destructive">⌧</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<button data-key="insert" data-val="A">A</button>
+<button data-key="insert" data-val="B">B</button>
+<button data-key="insert" data-val="C">C</button>
+<button data-key="insert" data-val="D">D</button>
+<button data-key="insert" data-val="E">E</button>
+
+<button data-key="insert" data-val="F">F</button>
+<button data-key="insert" data-val="G">G</button>
+<button data-key="insert" data-val="H">H</button>
+<button data-key="insert" data-val="I">I</button>
+<button data-key="insert" data-val="J">J</button>
+
+<button data-key="insert" data-val="K">K</button>
+<button data-key="insert" data-val="L">L</button>
+<button data-key="insert" data-val="M">M</button>
+<button data-key="insert" data-val="N">N</button>
+<button data-key="insert" data-val="O">O</button>
+
+<button data-key="insert" data-val="P">P</button>
+<button data-key="insert" data-val="Q">Q</button>
+<button data-key="insert" data-val="R">R</button>
+<button data-key="insert" data-val="S">S</button>
+<button data-key="insert" data-val="T">T</button>
+
+<button data-key="insert" data-val="U">U</button>
+<button data-key="insert" data-val="V">V</button>
+<button data-key="insert" data-val="W">W</button>
+<button data-key="insert" data-val="X">X</button>
+<button data-key="insert" data-val="Y">Y</button>
+
+<button data-key="insert" data-val="Z">Z</button>
+<button data-key="insert" data-val=":">:</button>
+<button data-key="insert" data-val=";">;</button>
+<button data-key="insert" data-val=")">)</button>
+<button data-key="insert" data-val="&quot;">&quot;</button>
+</div>
+
+<div class="keyboard-page"><!--12-->
+<button data-key="page" data-val="13" class="nav">⇧</button>
+<button data-key="cursor" data-val="left" class="nav">←</button>
+<button data-key="cursor" data-val="right" class="nav">→</button>
+<button data-key="exec" data-val="del" class="destructive">⌫</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<div class="select"><label for="select-lengths">Lengths</label>
+<select id="select-lengths"><option>Lengths</option>
+<option data-key="insert" data-val="m">meter</option>
+<option data-key="insert" data-val="in">inch</option>
+<option data-key="insert" data-val="ft">foot</option>
+<option data-key="insert" data-val="yd">yard</option>
+<option data-key="insert" data-val="mi">mile</option>
+<option data-key="insert" data-val="li">link</option>
+<option data-key="insert" data-val="rd">rod</option>
+<option data-key="insert" data-val="ch">chain</option>
+<option data-key="insert" data-val="angstrom">angstrom</option>
+<option data-key="insert" data-val="mil">mil</option>
+</select></div>
+<div class="select"><label for="select-area">Area</label>
+<select id="select-area"><option>Area</option>
+<option data-key="insert" data-val="m2">meter^2</option>
+<option data-key="insert" data-val="sqin">square inch</option>
+<option data-key="insert" data-val="sqft">square foot</option>
+<option data-key="insert" data-val="sqyd">square yard</option>
+<option data-key="insert" data-val="sqmi">square mile</option>
+<option data-key="insert" data-val="sqrd">square rod</option>
+<option data-key="insert" data-val="sqch">square chain</option>
+<option data-key="insert" data-val="sqmil">square mil</option>
+<option data-key="insert" data-val="acre">acre</option>
+<option data-key="insert" data-val="hectare">hectare</option>
+</select></div>
+<div class="select"><label for="select-volume">Volume</label>
+<select id="select-volume"><option>Volume</option>
+<option data-key="insert" data-val="m3">cubic meter</option>
+<option data-key="insert" data-val="l">litre</option>
+<option data-key="insert" data-val="cc">cc</option>
+<option data-key="insert" data-val="cuin">cubic inch</option>
+<option data-key="insert" data-val="cuft">cubic foot</option>
+<option data-key="insert" data-val="cuyd">cubic yard</option>
+<option data-key="insert" data-val="teaspoon">teaspoon</option>
+<option data-key="insert" data-val="tablespoon">tablespoon</option>
+</select></div>
+<div class="select"><label for="select-liquid">Liquid volume</label>
+<select id="select-liquid"><option>Liquid volume</option>
+<option data-key="insert" data-val="min">minim</option>
+<option data-key="insert" data-val="fldr">fluid dram</option>
+<option data-key="insert" data-val="floz">fluid ounce</option>
+<option data-key="insert" data-val="gi">gill</option>
+<option data-key="insert" data-val="cp">cup</option>
+<option data-key="insert" data-val="pt">pint</option>
+<option data-key="insert" data-val="qt">quart</option>
+<option data-key="insert" data-val="gal">gallon</option>
+<option data-key="insert" data-val="bbl">beer barrel</option>
+<option data-key="insert" data-val="obl">oil barrel</option>
+<option data-key="insert" data-val="hogshead">hogshead</option>
+<option data-key="insert" data-val="drop">drop</option>
+</select></div>
+<span>5</span>
+
+<div class="select"><label for="select-angle">Angle</label>
+<select id="select-angle"><option>Angle</option>
+<option data-key="insert" data-val="rad">radian</option>
+<option data-key="insert" data-val="deg">degree</option>
+<option data-key="insert" data-val="grad">gradian</option>
+<option data-key="insert" data-val="cycle">cycle</option>
+<option data-key="insert" data-val="arcsec">arcsec</option>
+<option data-key="insert" data-val="arcmin">arcmin</option>
+</select></div>
+<div class="select"><label for="select-time">Time</label>
+<select id="select-time"><option>Time</option>
+<option data-key="insert" data-val="s">second</option>
+<option data-key="insert" data-val="mins">minute</option>
+<option data-key="insert" data-val="h">hour</option>
+<option data-key="insert" data-val="day">day</option>
+<option data-key="insert" data-val="week">week</option>
+<option data-key="insert" data-val="month">month</option>
+<option data-key="insert" data-val="year">year</option>
+<option data-key="insert" data-val="decade">decade</option>
+<option data-key="insert" data-val="century">century</option>
+<option data-key="insert" data-val="millennium">millennium</option>
+</select></div>
+<div class="select"><label for="select-mass">Mass</label>
+<select id="select-mass"><option>Mass</option>
+<option data-key="insert" data-val="g">gram</option>
+<option data-key="insert" data-val="tonne">tonne</option>
+<option data-key="insert" data-val="ton">ton</option>
+<option data-key="insert" data-val="gr">grain</option>
+<option data-key="insert" data-val="dr">dram</option>
+<option data-key="insert" data-val="oz">ounce</option>
+<option data-key="insert" data-val="lbm">pound</option>
+<option data-key="insert" data-val="cwt">hundredweight</option>
+<option data-key="insert" data-val="stick">stick</option>
+<option data-key="insert" data-val="stone">stone</option>
+</select></div>
+<div class="select"><label for="select-temperature">Temp</label>
+<select id="select-temperature"><option>Temperature</option>
+<option data-key="insert" data-val="K">Kelvin</option>
+<option data-key="insert" data-val="degC">Celsius</option>
+<option data-key="insert" data-val="degF">Fahrenheit</option>
+<option data-key="insert" data-val="degR">Rankine</option>
+</select></div>
+<div class="select"><label for="select-binary">Binary</label>
+<select id="select-binary"><option>Binary</option>
+<option data-key="insert" data-val="b">bit</option>
+<option data-key="insert" data-val="B">byte</option>
+</select></div>
+
+<div class="select"><label for="select-force">Force</label>
+<select id="select-force"><option>Force</option>
+<option data-key="insert" data-val="N">Newton</option>
+<option data-key="insert" data-val="dyn">dyn</option>
+<option data-key="insert" data-val="lbf">lbf</option>
+<option data-key="insert" data-val="kip">kip</option>
+</select></div>
+<div class="select"><label for="select-energy">Energy</label>
+<select id="select-energy"><option>Energy</option>
+<option data-key="insert" data-val="J">Joule</option>
+<option data-key="insert" data-val="erg">erg</option>
+<option data-key="insert" data-val="Wh">Wh</option>
+<option data-key="insert" data-val="BTU">BTU</option>
+<option data-key="insert" data-val="eV">eV</option>
+</select></div>
+<div class="select"><label for="select-power">Power</label>
+<select id="select-power"><option>Power</option>
+<option data-key="insert" data-val="W">Watt</option>
+<option data-key="insert" data-val="hp">hp</option>
+</select></div>
+<div class="select"><label for="select-pressure">Pressure</label>
+<select id="select-pressure"><option>Pressure</option>
+<option data-key="insert" data-val="Pa">Pascal</option>
+<option data-key="insert" data-val="psi">psi</option>
+<option data-key="insert" data-val="atm">atm</option>
+<option data-key="insert" data-val="torr">torr</option>
+<option data-key="insert" data-val="bar">bar</option>
+<option data-key="insert" data-val="mmHg">mmHg</option>
+<option data-key="insert" data-val="mmH2O">mmH2O</option>
+<option data-key="insert" data-val="cmH20">cmH20</option>
+</select></div>
+<div class="select"><label for="select-other-units">Other</label>
+<select id="select-other-units"><option>Other units</option>
+<option data-key="insert" data-val="A">Ampere</option>
+<option data-key="insert" data-val="C">Coulomb</option>
+<option data-key="insert" data-val="V">Volt</option>
+<option data-key="insert" data-val="ohm">Ohm</option>
+<option data-key="insert" data-val="F">Farad</option>
+<option data-key="insert" data-val="Wb">Weber</option>
+<option data-key="insert" data-val="T">Tesla</option>
+<option data-key="insert" data-val="H">Henry</option>
+<option data-key="insert" data-val="S">Siemens</option>
+<option data-key="insert" data-val="mol">mol</option>
+<option data-key="insert" data-val="cd">Candela</option>
+<option data-key="insert" data-val="Hz">Hertz</option>
+</select></div>
+
+<div class="select"><label for="select-prefix-big">Big</label>
+<select id="select-prefix-big"><option>Big prefixes</option>
+<option data-key="insert" data-val="da">deca</option>
+<option data-key="insert" data-val="h">hecto</option>
+<option data-key="insert" data-val="k">kilo</option>
+<option data-key="insert" data-val="M">mega</option>
+<option data-key="insert" data-val="G">giga</option>
+<option data-key="insert" data-val="T">tera</option>
+<option data-key="insert" data-val="P">peta</option>
+<option data-key="insert" data-val="E">exa</option>
+<option data-key="insert" data-val="Z">zetta</option>
+<option data-key="insert" data-val="Y">yotta</option>
+</select></div>
+<div class="select"><label for="select-prefix-small">Small</label>
+<select id="select-prefix-small"><option>Small prefixes</option>
+<option data-key="insert" data-val="d">deci</option>
+<option data-key="insert" data-val="c">centi</option>
+<option data-key="insert" data-val="m">milli</option>
+<option data-key="insert" data-val="u">micro</option>
+<option data-key="insert" data-val="n">nano</option>
+<option data-key="insert" data-val="p">pico</option>
+<option data-key="insert" data-val="f">femto</option>
+<option data-key="insert" data-val="a">atto</option>
+<option data-key="insert" data-val="z">zepto</option>
+<option data-key="insert" data-val="y">yocto</option>
+</select></div>
+<div class="select"><label for="select-prefix-binary">Binary</label>
+<select id="select-prefix-binary"><option>Binary prefixes</option>
+<option data-key="insert" data-val="Ki">kibi</option>
+<option data-key="insert" data-val="Mi">mebi</option>
+<option data-key="insert" data-val="Gi">gibi</option>
+<option data-key="insert" data-val="Ti">tebi</option>
+<option data-key="insert" data-val="Pi">pebi</option>
+<option data-key="insert" data-val="Ei">exi</option>
+<option data-key="insert" data-val="Zi">zebi</option>
+<option data-key="insert" data-val="Yi">yobi</option>
+</select></div>
+<span>4</span>
+<button data-key="insert" data-val=" to ">to</button>
+
+</div>
+
+<div class="keyboard-page"><!--13-->
+<button data-key="page" data-val="12" class="nav">⬆</button>
+<button data-key="cursor" data-val="start" class="nav">⇤</button>
+<button data-key="cursor" data-val="end" class="nav">⇥</button>
+<button data-key="exec" data-val="clear" class="destructive">⌧</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<button data-key="insert" data-val="speedOfLight">c</button>
+<button data-key="insert" data-val="gravitationConstant">G</button>
+<button data-key="insert" data-val="planckConstant">h</button>
+<button data-key="insert" data-val="reducedPlanckConstant">ħ</button>
+<span>5</span>
+
+<div class="select"><label for="select-electromagnetic">EM const</label>
+<select id="select-electromagnetic"><option>Electromagnetic constants</option>
+<option data-key="insert" data-val="magneticConstant">μ₀</option>
+<option data-key="insert" data-val="electricConstant">ε₀</option>
+<option data-key="insert" data-val="vacuumImpedance">Z₀</option>
+<option data-key="insert" data-val="coulomb">κ</option>
+<option data-key="insert" data-val="elementaryCharge">e</option>
+<option data-key="insert" data-val="bohrMagneton">μ_B</option>
+<option data-key="insert" data-val="conductanceQuantum">G₀</option>
+<option data-key="insert" data-val="inverseConductanceQuantum">G₀⁻¹</option>
+<option data-key="insert" data-val="magneticFluxQuantum">f₀</option>
+<option data-key="insert" data-val="nuclearMagneton">μ_N</option>
+<option data-key="insert" data-val="klitzing">R_K</option>
+</select></div>
+<div class="select"><label for="select-atomic">Atomic</label>
+<select id="select-atomic"><option>Atomic constants</option>
+<option data-key="insert" data-val="bohrRadius">a₀</option>
+<option data-key="insert" data-val="classicalElectronRadius">r_e</option>
+<option data-key="insert" data-val="electronMass">m_e</option>
+<option data-key="insert" data-val="fermiCoupling">G_F</option>
+<option data-key="insert" data-val="fineStructure">α</option>
+<option data-key="insert" data-val="hartreeEnergy">E_h</option>
+<option data-key="insert" data-val="protonMass">m_p</option>
+<option data-key="insert" data-val="deuteronMass">m_d</option>
+<option data-key="insert" data-val="neutronMass">m_n</option>
+<option data-key="insert" data-val="quantumOfCirculation">h/(2m_e)</option>
+<option data-key="insert" data-val="rydberg">R_∞</option>
+<option data-key="insert" data-val="thomsonCrossSection">thomsonCrossSection</option>
+<option data-key="insert" data-val="weakMixingAngle">weakMixingAngle</option>
+<option data-key="insert" data-val="efimovFactor">efimovFactor</option>
+</select></div>
+<div class="select"><label for="select-chemical">Chemical</label>
+<select id="select-chemical"><option>Chemical constants</option>
+<option data-key="insert" data-val="atomicMass">m_u</option>
+<option data-key="insert" data-val="avogadro">N_A</option>
+<option data-key="insert" data-val="boltzmann">k</option>
+<option data-key="insert" data-val="faraday">F</option>
+<option data-key="insert" data-val="firstRadiation">c₁</option>
+<option data-key="insert" data-val="loschmidt">n₀</option>
+<option data-key="insert" data-val="gasConstant">R</option>
+<option data-key="insert" data-val="molarPlanckConstant">N_A h</option>
+<option data-key="insert" data-val="molarVolume">V_m</option>
+<option data-key="insert" data-val="sackurTetrode">sackurTetrode</option>
+<option data-key="insert" data-val="secondRadiation">c₂</option>
+<option data-key="insert" data-val="stefanBoltzmann">σ</option>
+<option data-key="insert" data-val="wienDisplacement">b</option>
+</select></div>
+<div class="select"><label for="select-adopted">Values</label>
+<select id="select-adopted"><option>Adopted values</option>
+<option data-key="insert" data-val="molarMass">M_u</option>
+<option data-key="insert" data-val="molarMassC12">M(₁₂C)</option>
+<option data-key="insert" data-val="gravity">g_n</option>
+<option data-key="insert" data-val="atm">atm</option>
+</select></div>
+<div class="select"><label for="select-natural">Natural</label>
+<select id="select-natural"><option>Natural units</option>
+<option data-key="insert" data-val="planckLength">l_P</option>
+<option data-key="insert" data-val="planckMass">m_P</option>
+<option data-key="insert" data-val="planckTime">t_P</option>
+<option data-key="insert" data-val="planckCharge">q_P</option>
+<option data-key="insert" data-val="planckTemperature">T_P</option>
+</select></div>
+
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+</div>
+
+<div class="keyboard-page"><!--14-->
+<button data-key="cursor" data-val="start" class="nav">⇤</button>
+<button data-key="cursor" data-val="left" class="nav">←</button>
+<button data-key="cursor" data-val="right" class="nav">→</button>
+<button data-key="cursor" data-val="end" class="nav">⇥</button>
+<button data-key="page" data-val="0" class="nav">↶</button>
+
+<input>
+</div>
+
+</div>
+</div>
+<script src="res/app.js"></script>
+</body></html>

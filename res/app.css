@@ -1,0 +1,42 @@
+html, body {
+	overflow: hidden;
+	height: 100%;
+	margin: 0;
+	font-family: sans-serif;
+}
+
+#log-area {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 100%;
+}
+
+#log-area > div {
+	height: 100%;
+	overflow: auto;
+}
+
+#log {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	margin: 16px 0;
+}
+
+#log dt {
+	margin-left: 0em;
+	padding-left: 0.2em;
+	background-color: #aaa;
+	color: black;
+}
+
+#log dd {
+	margin-left: 0em;
+	padding-left: 1.2em;
+}
+
+#input-area {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	background-color: #fff;
+}
