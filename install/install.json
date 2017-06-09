@@ -7,7 +7,8 @@
 	"serviceworker": true,
 	"icon": "res/icon-128.png",
 	"screenshots": [
-		"screenshot.png"
+		"screenshot.png",
+		"screenshot2.png"
 	],
 	"desc": {
 		"en": ["This is an advanced calculator. It has an integrated virtual keyboard that allows you to enter complex formulas. It supports a great variety of scientific functions, unit conversion and other features."],
