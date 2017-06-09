@@ -1,3 +1,8 @@
+/*global Keyboard: true*/
+Keyboard =
+(function () {
+"use strict";
+
 function Keyboard (el, input, callback) {
 	el.addEventListener('click', this.onClick.bind(this));
 	el.addEventListener('change', this.onChange.bind(this));
@@ -125,6 +130,7 @@ Keyboard.prototype.showPage = function (page) {
 	var i, input;
 
 	function blurHandler () {
+		/*jshint validthis: true*/
 		setTimeout(function () {
 			this.focus();
 		}.bind(this), 0);
@@ -185,3 +191,6 @@ Keyboard.prototype.exec = function (command) {
 		break;
 	}
 };
+
+return Keyboard;
+})();

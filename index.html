@@ -18,6 +18,10 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <script src="res/input.js"></script>
 <script src="res/keyboard.js"></script>
 <script src="res/lib/math.min.js"></script>
+<script src="res/lib/pan-zoom-svg.js"></script>
+<script src="res/lib/plot-svg.js"></script>
+<script src="res/plot.js"></script>
+<link rel="stylesheet" href="res/lib/plot-svg.css">
 <link rel="stylesheet" href="res/app.css">
 <link rel="stylesheet" href="res/input.css">
 <link rel="stylesheet" href="res/keyboard.css">
@@ -179,7 +183,12 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="insert" data-val="simplify(&quot;&#x1b;&quot;)">simplify</button>
 <button data-key="insert" data-val="derivative(&quot;&#x1b;&quot;,&quot;x&quot;)">deriv</button>
 <button data-key="insert" data-val="x">x</button>
-<span>4</span>
+<div class="select"><label for="select-plot">plot…</label>
+<select id="select-plot"><option>plot…</option>
+<option data-key="insert" data-val="plotCartesian(&#x1b;, x, -10, 10)">plotCartesian</option>
+<option data-key="insert" data-val="plotPolar(&#x1b;, phi, -2pi, 2pi)">plotPolar</option>
+<option data-key="insert" data-val="plotParametric(&#x1b;, , t, 0, 10)">plotParametric</option>
+</select></div>
 <span>5</span>
 
 <button data-key="insert" data-val="fraction(&#x1b;)">fraction</button>
@@ -217,6 +226,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="usolve(&#x1b;,)">usolve</option>
 <option data-key="insert" data-val="lup(&#x1b;)">lup</option>
 <option data-key="insert" data-val="slu(&#x1b;,,)">slu</option>
+<option data-key="insert" data-val="qr(&#x1b;)">qr</option>
 </select></div>
 <button data-key="insert" data-val=".*">.*</button>
 <button data-key="insert" data-val="./">./</button>

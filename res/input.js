@@ -1,3 +1,8 @@
+/*global Input: true*/
+Input =
+(function () {
+"use strict";
+
 function Input (el) {
 	this.el = el;
 	this.pre = document.createElement('span');
@@ -96,7 +101,7 @@ Input.prototype.insert = function (pre, post) {
 	this.text = this.text.slice(0, this.cursorPos) + pre + post + this.text.slice(this.cursorPos);
 	this.cursorPos += pre.length;
 	this.update();
-}
+};
 
 Input.prototype.remove = function (toRight) {
 	if (
@@ -105,9 +110,14 @@ Input.prototype.remove = function (toRight) {
 	) {
 		return;
 	}
-	this.text = this.text.slice(0, toRight ? this.cursorPos : this.cursorPos - 1) + this.text.slice(toRight ? this.cursorPos + 1 : this.cursorPos);
+	this.text =
+		this.text.slice(0, toRight ? this.cursorPos : this.cursorPos - 1) +
+		this.text.slice(toRight ? this.cursorPos + 1 : this.cursorPos);
 	if (!toRight) {
 		this.cursorPos--;
 	}
 	this.update();
 };
+
+return Input;
+})();
