@@ -2,7 +2,7 @@
 (function (worker) {
 "use strict";
 
-var VERSION = 'v1.1',
+var VERSION = 'v1.2',
 	FILES = [
 		'index.html',
 		'res/app.css',
@@ -12,8 +12,6 @@ var VERSION = 'v1.1',
 		'res/keyboard.css',
 		'res/keyboard.js',
 		'res/plot.js',
-		'res/lib/plot-svg.css',
-		'res/lib/plot-svg.js',
 		'res/lib/math.min.js'
 	];
 

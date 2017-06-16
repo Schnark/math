@@ -5,6 +5,11 @@ html, body {
 	font-family: sans-serif;
 }
 
+svg {
+	/*fix scrolling*/
+	pointer-events: none;
+}
+
 #log-area {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;

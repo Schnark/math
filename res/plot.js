@@ -1,16 +1,207 @@
-/*global math, PlotSvg*/
+/* The plotting code is based on plot-svg by Bretton Wade, which is availabe under the following license:
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Bretton Wade
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+/*global math*/
 (function () {
 "use strict";
 
-function plotSvg (points) {
-	PlotSvg.setPlotPoints(false);
-	return PlotSvg.multipleLine(null, null, null, points);
+function getRange (arrayArrayPoints, coord) {
+	var values = arrayArrayPoints.reduce(function (prev, next) {
+		return prev.concat(next.map(function (point) {
+			return point[coord];
+		}));
+	}, []).filter(function (val) {
+		return isFinite(val);
+	}), q0, q25, q50, q75, q100, min, max;
+	if (values.length === 0) {
+		return {
+			min: -0.5,
+			max: 0.5
+		};
+	}
+	values.sort(function (a, b) {
+		return a - b;
+	});
+	q0 = values[0];
+	q25 = values[Math.floor(values.length / 4)];
+	q50 = values[Math.floor(values.length / 2)];
+	q75 = values[Math.floor(3 * values.length / 4)];
+	q100 = values[values.length - 1];
+	min = Math.max(q0 - (q100 - q0) / 100, q50 - 5 * (q75 - q25));
+	max = Math.min(q100 + (q100 - q0) / 100, q50 + 5 * (q75 - q25));
+	if (max - min < 1e-10) {
+		min -= 0.5;
+		max += 0.5;
+	}
+	return {
+		min: min,
+		max: max
+	};
+}
+
+function getTicks (min, max, c) {
+	var d = (max - min) / (c - 1), order = Math.floor(Math.log(d) / Math.log(10)), ticks = [];
+	d /= Math.pow(10, order);
+	if (d <= 1) {
+		d = 1;
+	} else if (d <= 2) {
+		d = 2;
+	} else if (d <= 2.5) {
+		d = 2.5;
+	} else if (d <= 5) {
+		d = 5;
+	} else {
+		d = 10;
+	}
+	d *= Math.pow(10, order);
+	ticks.push(Math.ceil(min / d) * d);
+	while (ticks[ticks.length - 1] + d <= max) {
+		ticks.push(ticks[ticks.length - 1] + d);
+	}
+	return ticks;
+}
+
+function getPlottingArea (arrayArrayPoints, w, h) {
+	var rangeX = getRange(arrayArrayPoints, 'x'),
+		rangeY = getRange(arrayArrayPoints, 'y'),
+		dx, dy;
+	dx = rangeX.max - rangeX.min;
+	dy = rangeY.max - rangeY.min;
+
+	/*prefer squares
+	alpha = dx / dy * h / w;
+	if (1 < alpha && alpha <= 2) {
+		rangeY.min -= (dy * alpha - dy) / 2;
+		rangeY.max += (dy * alpha - dy) / 2;
+		dy = rangeY.max - rangeY.min;
+	} else if (0.5 <= alpha && alpha < 1) {
+		rangeX.min -= (dx / alpha - dx) / 2;
+		rangeX.max += (dx / alpha - dx) / 2;
+		dx = rangeX.max - rangeX.min;
+	}*/
+
+	return {
+		ticksX: getTicks(rangeX.min, rangeX.max, w / 40),
+		ticksY: getTicks(rangeY.min, rangeY.max, h / 40),
+		mapX: function (x) {
+			return (x - rangeX.min) / dx * w;
+		},
+		mapY: function (y) {
+			return (y - rangeY.min) / dy * h;
+		},
+		w: w,
+		h: h
+	};
+}
+
+function svgHead (data) {
+	var buffer = data.h * 0.15;
+	return '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="' +
+		(buffer * -1.75) + ', ' + (-buffer) + ', ' + (data.w + 3 * buffer) + ', ' +
+		(data.h + 2 * buffer) + '" preserveAspectRatio="xMidYMid meet">' +
+		'<g transform="translate(0, ' + data.h + '), scale(1, -1)">';
+}
+
+function svgAxes (data) {
+	function str (n) {
+		var str1 = n.toExponential(1), str2 = n.toString();
+		return str1.length < str2.length ? str1 : str2;
+	}
+
+	var i, c, svg = '';
+	for (i = 0; i < data.ticksX.length; i++) {
+		c = data.mapX(data.ticksX[i]);
+		svg += '<line x1="' + c + '" y1="0" x2="' + c + '" y2="' + data.h + '" stroke="#bbb" stroke-width="0.5" />';
+		svg += '<text x="' + c + '" y="12.5" font="16px sans-serif" fill="#888" ' +
+			'text-anchor="middle" transform="scale(1, -1)"><tspan dy="0.5em">' + str(data.ticksX[i]) + '</tspan></text>';
+	}
+	for (i = 0; i < data.ticksY.length; i++) {
+		c = data.mapY(data.ticksY[i]);
+		svg += '<line x1="0" y1="' + c + '" x2="' + data.w + '" y2="' + c + '" stroke="#bbb" stroke-width="0.5" />';
+		svg += '<text x="-7.5" y="' + (-c) + '" font="16px sans-serif" fill="#888" ' +
+			'text-anchor="end" transform="scale(1, -1)"><tspan dy="0.33em">' + str(data.ticksY[i]) + '</tspan></text>';
+	}
+	return svg;
+}
+
+function svgCurve (data, points, color) {
+	var i, svg = '', open = false, x, y;
+	for (i = 0; i < points.length; i++) {
+		x = data.mapX(points[i].x);
+		y = data.mapY(points[i].y);
+		if (0 <= x && x <= data.w && 0 <= y && y <= data.h) {
+			if (!open) {
+				svg += '<polyline fill="none" stroke-width="2" stroke="' + color + '" points="';
+				open = true;
+			}
+			svg += x + ',' + y + ' ';
+		} else {
+			if (open) {
+				svg += '" />';
+				open = false;
+			}
+		}
+	}
+	if (open) {
+		svg += '" />';
+	}
+	return svg;
+}
+
+function svgCurves (data, curves) {
+	var i, svg = '', colors = [
+		'rgb(114,147,203)',
+		'rgb(225,151,76)',
+		'rgb(132,186,91)',
+		'rgb(211,94,96)',
+		'rgb(144,103,167)'
+	];
+	for (i = 0; i < curves.length; i++) {
+		svg += svgCurve(data, curves[i], colors[i % colors.length]);
+	}
+	return svg;
+}
+
+function svgFoot () {
+	return '</g></svg>';
+}
+
+function plotSvg (arrayArrayPoints) {
+	var data = getPlottingArea(arrayArrayPoints, 600, 400);
+	return '<div style="overflow: hidden; max-width: 100%; margin: auto; background-color: #eee;">' +
+		svgHead(data) +
+		svgAxes(data) +
+		svgCurves(data, arrayArrayPoints) +
+		svgFoot() +
+		'</div>';
 }
 
 function getPointsCartesian (f, start, end, step) {
 	var points = [], x;
 	for (x = start; x <= end; x += step) {
-		points.push({x: x, y: f(x)});
+		points.push({x: x, y: Number(f(x))});
 	}
 	return points;
 }
@@ -27,18 +218,18 @@ function getPointsPolar (f, start, end, step) {
 function getPointsParametric (f, g, start, end, step) {
 	var points = [], t;
 	for (t = start; t <= end; t += step) {
-		points.push({x: f(t), y: g(t)});
+		points.push({x: Number(f(t)), y: Number(g(t))});
 	}
 	return points;
 }
 
 function plotCartesian (fs, start, end, step) {
 	return plotSvg(fs.map(function (f) {
-		return getPointsCartesian(f, start, end, step || 0.01);
+		return getPointsCartesian(f, start, end, step || Math.max((end - start) / 1000, 1e-10));
 	}));
 }
 
-plotCartesian.transform = function (args, _math, scope) {
+plotCartesian.transform = function (args, _, scope) {
 	var variable, start, end, step, fnScope, fnCodes, fns;
 	if (args[1] instanceof math.expression.node.SymbolNode) {
 		variable = args[1].name;
@@ -75,11 +266,11 @@ plotCartesian.transform.rawArgs = true;
 
 function plotPolar (fs, start, end, step) {
 	return plotSvg(fs.map(function (f) {
-		return getPointsPolar(f, start, end, step || 0.01);
+		return getPointsPolar(f, start, end, step || Math.max((end - start) / 1000, 1e-10));
 	}));
 }
 
-plotPolar.transform = function (args, _math, scope) {
+plotPolar.transform = function (args, _, scope) {
 	var variable, start, end, step, fnScope, fnCodes, fns;
 	if (args[1] instanceof math.expression.node.SymbolNode) {
 		variable = args[1].name;
@@ -116,11 +307,11 @@ plotPolar.transform.rawArgs = true;
 
 function plotParametric (fs, gs, start, end, step) {
 	return plotSvg(fs.map(function (f, i) {
-		return getPointsParametric(f, gs[i], start, end, step || 0.01);
+		return getPointsParametric(f, gs[i], start, end, step || Math.max((end - start) / 1000, 1e-10));
 	}));
 }
 
-plotParametric.transform = function (args, _math, scope) {
+plotParametric.transform = function (args, _, scope) {
 	var variable, start, end, step, fnScope, fn1Codes, fn2Codes, fn1s, fn2s;
 	if (args[2] instanceof math.expression.node.SymbolNode) {
 		variable = args[2].name;
