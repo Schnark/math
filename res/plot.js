@@ -62,7 +62,21 @@ function getRange (arrayArrayPoints, coord) {
 }
 
 function getTicks (min, max, c) {
-	var d = (max - min) / (c - 1), order = Math.floor(Math.log(d) / Math.log(10)), ticks = [];
+	function str (n, order) {
+		n /= Math.pow(10, order);
+		n = Math.round(n * 2) / 2;
+		if (n === 0) {
+			return '0';
+		} else if (order > 3) {
+			return n + 'e' + order;
+		} else if (order >= -2) {
+			return (n * Math.pow(10, order)).toFixed(2).replace(/\.?0+$/, '');
+		} else {
+			return n + 'e' + order;
+		}
+	}
+
+	var d = (max - min) / (c - 1), order = Math.floor(Math.log(d) / Math.log(10)), ticks = [], pos;
 	d /= Math.pow(10, order);
 	if (d <= 1) {
 		d = 1;
@@ -73,12 +87,15 @@ function getTicks (min, max, c) {
 	} else if (d <= 5) {
 		d = 5;
 	} else {
-		d = 10;
+		d = 1;
+		order++;
 	}
 	d *= Math.pow(10, order);
-	ticks.push(Math.ceil(min / d) * d);
-	while (ticks[ticks.length - 1] + d <= max) {
-		ticks.push(ticks[ticks.length - 1] + d);
+	pos = Math.ceil(min / d) * d;
+	ticks.push({pos: pos, label: str(pos, order)});
+	while (ticks[ticks.length - 1].pos + d <= max) {
+		pos = ticks[ticks.length - 1].pos + d;
+		ticks.push({pos: pos, label: str(pos, order)});
 	}
 	return ticks;
 }
@@ -125,23 +142,18 @@ function svgHead (data) {
 }
 
 function svgAxes (data) {
-	function str (n) {
-		var str1 = n.toExponential(1), str2 = n.toString();
-		return str1.length < str2.length ? str1 : str2;
-	}
-
 	var i, c, svg = '';
 	for (i = 0; i < data.ticksX.length; i++) {
-		c = data.mapX(data.ticksX[i]);
+		c = data.mapX(data.ticksX[i].pos);
 		svg += '<line x1="' + c + '" y1="0" x2="' + c + '" y2="' + data.h + '" stroke="#bbb" stroke-width="0.5" />';
 		svg += '<text x="' + c + '" y="12.5" font="16px sans-serif" fill="#888" ' +
-			'text-anchor="middle" transform="scale(1, -1)"><tspan dy="0.5em">' + str(data.ticksX[i]) + '</tspan></text>';
+			'text-anchor="middle" transform="scale(1, -1)"><tspan dy="0.5em">' + data.ticksX[i].label + '</tspan></text>';
 	}
 	for (i = 0; i < data.ticksY.length; i++) {
-		c = data.mapY(data.ticksY[i]);
+		c = data.mapY(data.ticksY[i].pos);
 		svg += '<line x1="0" y1="' + c + '" x2="' + data.w + '" y2="' + c + '" stroke="#bbb" stroke-width="0.5" />';
 		svg += '<text x="-7.5" y="' + (-c) + '" font="16px sans-serif" fill="#888" ' +
-			'text-anchor="end" transform="scale(1, -1)"><tspan dy="0.33em">' + str(data.ticksY[i]) + '</tspan></text>';
+			'text-anchor="end" transform="scale(1, -1)"><tspan dy="0.33em">' + data.ticksY[i].label + '</tspan></text>';
 	}
 	return svg;
 }
@@ -239,7 +251,13 @@ plotCartesian.transform = function (args, _, scope) {
 
 	start = args[2].compile().eval(scope);
 	end = args[3].compile().eval(scope);
+	if (start >= end) {
+		throw new Error('Start must be smaller than end');
+	}
 	step = args[4] && args[4].compile().eval(scope);
+	if (step && step <= 0) {
+		throw new Error('Step must be positive');
+	}
 
 	fnScope = Object.create(scope);
 
@@ -280,7 +298,13 @@ plotPolar.transform = function (args, _, scope) {
 
 	start = args[2].compile().eval(scope);
 	end = args[3].compile().eval(scope);
+	if (start >= end) {
+		throw new Error('Start must be smaller than end');
+	}
 	step = args[4] && args[4].compile().eval(scope);
+	if (step && step <= 0) {
+		throw new Error('Step must be positive');
+	}
 
 	fnScope = Object.create(scope);
 
@@ -321,7 +345,13 @@ plotParametric.transform = function (args, _, scope) {
 
 	start = args[3].compile().eval(scope);
 	end = args[4].compile().eval(scope);
+	if (start >= end) {
+		throw new Error('Start must be smaller than end');
+	}
 	step = args[5] && args[5].compile().eval(scope);
+	if (step && step <= 0) {
+		throw new Error('Step must be positive');
+	}
 
 	fnScope = Object.create(scope);
 
