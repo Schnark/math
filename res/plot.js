@@ -103,21 +103,21 @@ function getTicks (min, max, c) {
 function getPlottingArea (arrayArrayPoints, w, h) {
 	var rangeX = getRange(arrayArrayPoints, 'x'),
 		rangeY = getRange(arrayArrayPoints, 'y'),
-		dx, dy;
+		dx, dy, alpha;
 	dx = rangeX.max - rangeX.min;
 	dy = rangeY.max - rangeY.min;
 
-	/*prefer squares
+	//prefer squares
 	alpha = dx / dy * h / w;
-	if (1 < alpha && alpha <= 2) {
+	if (1 < alpha && alpha <= 1.5) {
 		rangeY.min -= (dy * alpha - dy) / 2;
 		rangeY.max += (dy * alpha - dy) / 2;
 		dy = rangeY.max - rangeY.min;
-	} else if (0.5 <= alpha && alpha < 1) {
+	} else if (2 / 3 <= alpha && alpha < 1) {
 		rangeX.min -= (dx / alpha - dx) / 2;
 		rangeX.max += (dx / alpha - dx) / 2;
 		dx = rangeX.max - rangeX.min;
-	}*/
+	}
 
 	return {
 		ticksX: getTicks(rangeX.min, rangeX.max, w / 40),
@@ -201,13 +201,21 @@ function svgFoot () {
 }
 
 function plotSvg (arrayArrayPoints) {
-	var data = getPlottingArea(arrayArrayPoints, 600, 400);
-	return '<div style="overflow: hidden; max-width: 100%; margin: auto; background-color: #eee;">' +
+	var data = getPlottingArea(arrayArrayPoints, 600, 400), svg;
+	svg = '<div style="overflow: hidden; max-width: 100%; background-color: #eee;">' +
 		svgHead(data) +
 		svgAxes(data) +
 		svgCurves(data, arrayArrayPoints) +
 		svgFoot() +
 		'</div>';
+	return {
+		toString: function () {
+			return '[graph]';
+		},
+		toHtml: function () {
+			return svg;
+		}
+	};
 }
 
 function getPointsCartesian (f, start, end, step) {

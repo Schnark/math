@@ -11,8 +11,10 @@ function evaluate (expr) {
 	var res;
 	try {
 		res = parser.eval(expr);
-		parser.set('ans', res);
-		res = math.format(res);
+		if (!res.toHtml) {
+			parser.set('ans', res);
+			res = math.format(res);
+		}
 	} catch (e) {
 		res = e.toString();
 	}
@@ -28,8 +30,8 @@ function log (input, output) {
 	logElement.appendChild(node);
 
 	node = document.createElement('dd');
-	if (output.slice(0, 2) === '"<' && output.slice(-2) === '>"') {
-		node.innerHTML = output.slice(1, -1);
+	if (output.toHtml) {
+		node.innerHTML = output.toHtml();
 	} else {
 		output = document.createTextNode(output);
 		node.appendChild(output);
