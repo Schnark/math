@@ -123,6 +123,9 @@ function help (topic) {
 			':': 'range',
 			'[': 'matrix'
 		};
+	if (typeof topic !== 'string') {
+		return oldHelp(topic);
+	}
 	topic = topic.replace(/\([^()]*\)/, '').trim();
 	if (internal[topic]) {
 		return new math.type.Help(internal[topic]);
