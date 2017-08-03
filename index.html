@@ -229,7 +229,19 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="insert" data-val=".*">.*</button>
 <button data-key="insert" data-val="./">./</button>
 
-<span>1</span>
+<div class="select"><label for="select-set">set/…</label>
+<select id="select-set"><option>set/…</option>
+<option data-key="insert" data-val="setUnion(&#x1b;,)">setUnion</option>
+<option data-key="insert" data-val="setIntersect(&#x1b;,)">setIntersect</option>
+<option data-key="insert" data-val="setDifference(&#x1b;,)">setDifference</option>
+<option data-key="insert" data-val="setSymDifference(&#x1b;,)">setSymDifference</option>
+<option data-key="insert" data-val="setCartesian(&#x1b;,)">setCartesian</option>
+<option data-key="insert" data-val="setPowerset(&#x1b;)">setPowerset</option>
+<option data-key="insert" data-val="setSize(&#x1b;)">setSize</option>
+<option data-key="insert" data-val="setMultiplicity(&#x1b;,)">setMultiplicity</option>
+<option data-key="insert" data-val="setIsSubset(&#x1b;,)">setIsSubset</option>
+<option data-key="insert" data-val="setDistinct(&#x1b;)">setDistinct</option>
+</select></div>
 <span>2</span>
 <span>3</span>
 <button data-key="insert" data-val=";">;</button>
@@ -361,7 +373,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="isNaN(&#x1b;)">isNaN</option>
 </select></div>
 <button data-key="insert" data-val="typeof(&#x1b;)">typeof</button>
-<span>3</span>
+<button data-key="insert" data-val="compareNatural(&#x1b;,)">compNat</button>
 <button data-key="insert" data-val=" and ">and</button>
 <button data-key="insert" data-val=" xor ">xor</button>
 </div>
