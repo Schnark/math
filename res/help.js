@@ -119,6 +119,7 @@ function help (topic) {
 			'>=': 'largerEq',
 			'<': 'smaller',
 			'<=': 'smallerEq',
+			'!': 'factorial',
 			'%': 'mod',
 			':': 'range',
 			'[': 'matrix'

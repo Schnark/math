@@ -11,7 +11,9 @@ function evaluate (expr) {
 	var res;
 	try {
 		res = parser.eval(expr);
-		if (!res.toHtml) {
+		if (res === undefined) {
+			res = 'undefined';
+		} else if (!res.toHtml) {
 			parser.set('ans', res);
 			res = math.format(res);
 		}
