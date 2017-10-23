@@ -18,6 +18,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <script src="res/input.js"></script>
 <script src="res/keyboard.js"></script>
 <script src="res/lib/math.min.js"></script>
+<script src="res/currency.js"></script>
 <script src="res/help.js"></script>
 <script src="res/plot.js"></script>
 <link rel="stylesheet" href="res/app.css">
@@ -551,7 +552,42 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="hogshead">hogshead</option>
 <option data-key="insert" data-val="drop">drop</option>
 </select></div>
-<span>5</span>
+<div class="select"><label for="select-currencies">Money</label>
+<select id="select-currencies"><option>Currencies</option>
+<option data-key="insert" data-val="EUR">Euro (EUR)</option>
+<option data-key="insert" data-val="USD">US dollar (USD)</option>
+<option data-key="insert" data-val="CHF">Swiss franc (CHF)</option>
+<option data-key="insert" data-val="GBP">British pound (GBP)</option>
+<option data-key="insert" data-val="JPY">Japanese yen (JPY)</option>
+<option data-key="insert" data-val="RUB">Russian ruble (RUB)</option>
+<option data-key="insert" data-val="CNY">Renminbi (CNY, China)</option>
+<option data-key="insert" data-val="NOK">Norwegian krone (NOK)</option>
+<option data-key="insert" data-val="SEK">Swedish krona (SEK)</option>
+<option data-key="insert" data-val="DKK">Danish krone (DKK)</option>
+<option data-key="insert" data-val="CZK">Czech koruna (CZK)</option>
+<option data-key="insert" data-val="HRK">Croatian kuna (HRK)</option>
+<option data-key="insert" data-val="HUF">Hungarian forint (HUF)</option>
+<option data-key="insert" data-val="BGN">Bulgarian lev (BGN)</option>
+<option data-key="insert" data-val="RON">Romanian leu (RON)</option>
+<option data-key="insert" data-val="PLN">Polish złoty (PLN)</option>
+<option data-key="insert" data-val="TRY">Turkish lira (TRY)</option>
+<option data-key="insert" data-val="ILS">Israeli shekel (ILS)</option>
+<option data-key="insert" data-val="AUD">Australian dollar (AUD)</option>
+<option data-key="insert" data-val="NZD">New Zealand dollar (NZD)</option>
+<option data-key="insert" data-val="CAD">Canadian dollar (CAD)</option>
+<option data-key="insert" data-val="HKD">Hong Kong dollar (HKD)</option>
+<option data-key="insert" data-val="SGD">Singapore dollar (SGD)</option>
+<option data-key="insert" data-val="INR">Indian rupee (INR)</option>
+<option data-key="insert" data-val="IDR">Indonesian rupiah (IDR)</option>
+<option data-key="insert" data-val="THB">Thai baht (THB)</option>
+<option data-key="insert" data-val="KRW">South Korean won (KRW)</option>
+<option data-key="insert" data-val="MYR">Malaysian ringgit (MYR)</option>
+<option data-key="insert" data-val="PHP">Philippine peso (PHP)</option>
+<option data-key="insert" data-val="MXN">Mexican peso (MXN)</option>
+<option data-key="insert" data-val="BRL">Brazilian real (BRL)</option>
+<option data-key="insert" data-val="ZAR">South African rand (ZAR)</option>
+<option data-key="insert" data-val="updateCurrencies()">updateCurrencies</option>
+</select></div>
 
 <div class="select"><label for="select-angle">Angle</label>
 <select id="select-angle"><option>Angle</option>

@@ -85,6 +85,13 @@ function help (topic) {
 				],
 				description: 'Display information about this app'
 			},
+			updateCurrencies: {
+				name: 'updateCurrencies',
+				syntax: [
+					'updateCurrencies()'
+				],
+				description: 'Update exchange rates for currencies (using https://api.fixer.io)'
+			},
 			ans: {
 				name: 'ans',
 				syntax: [
