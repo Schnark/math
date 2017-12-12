@@ -1,7 +1,7 @@
-<!DOCTYPE HTML>
-<html><head><title>Calculator</title>
+<!DOCTYPE html>
+<html lang="en"><head><title>Calculator</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, user-scalable=no">
+<meta name="viewport" content="width=device-width">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
@@ -15,15 +15,16 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 	navigator.serviceWorker.register('sw.js');
 }
 </script>
-<script src="res/input.js"></script>
-<script src="res/keyboard.js"></script>
-<script src="res/lib/math.min.js"></script>
-<script src="res/currency.js"></script>
-<script src="res/help.js"></script>
-<script src="res/plot.js"></script>
 <link rel="stylesheet" href="res/app.css">
 <link rel="stylesheet" href="res/input.css">
 <link rel="stylesheet" href="res/keyboard.css">
+<script src="res/input.js" defer></script>
+<script src="res/keyboard.js" defer></script>
+<script src="res/lib/math.min.js" defer></script>
+<script src="res/currency.js" defer></script>
+<script src="res/help.js" defer></script>
+<script src="res/plot.js" defer></script>
+<script src="res/app.js" defer></script>
 </head><body>
 <div id="log-area"><div>
 <dl id="log"></dl>
@@ -102,44 +103,44 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="exec" data-val="del" class="destructive">⌫</button>
 <button data-key="page" data-val="0" class="nav">↶</button>
 
-<button data-key="insert" data-val="abs(&#x1b;)">abs</button>
-<button data-key="insert" data-val="sqrt(&#x1b;)">sqrt</button>
-<button data-key="insert" data-val="sin(&#x1b;)">sin</button>
+<button data-key="insert" data-val="abs(&#xa;)">abs</button>
+<button data-key="insert" data-val="sqrt(&#xa;)">sqrt</button>
+<button data-key="insert" data-val="sin(&#xa;)">sin</button>
 <div class="select"><label for="select-cos">cos/…</label>
 <select id="select-cos"><option>cos/…</option>
-<option data-key="insert" data-val="sin(&#x1b;)">sin</option>
-<option data-key="insert" data-val="cos(&#x1b;)">cos</option>
-<option data-key="insert" data-val="tan(&#x1b;)">tan</option>
-<option data-key="insert" data-val="cot(&#x1b;)">cot</option>
-<option data-key="insert" data-val="sec(&#x1b;)">sec</option>
-<option data-key="insert" data-val="csc(&#x1b;)">csc</option>
+<option data-key="insert" data-val="sin(&#xa;)">sin</option>
+<option data-key="insert" data-val="cos(&#xa;)">cos</option>
+<option data-key="insert" data-val="tan(&#xa;)">tan</option>
+<option data-key="insert" data-val="cot(&#xa;)">cot</option>
+<option data-key="insert" data-val="sec(&#xa;)">sec</option>
+<option data-key="insert" data-val="csc(&#xa;)">csc</option>
 </select></div>
 <div class="select"><label for="select-sinh">sinh/…</label>
 <select id="select-sinh"><option>sinh/…</option>
-<option data-key="insert" data-val="sinh(&#x1b;)">sinh</option>
-<option data-key="insert" data-val="cosh(&#x1b;)">cosh</option>
-<option data-key="insert" data-val="tanh(&#x1b;)">tanh</option>
-<option data-key="insert" data-val="coth(&#x1b;)">coth</option>
-<option data-key="insert" data-val="sech(&#x1b;)">sech</option>
-<option data-key="insert" data-val="csch(&#x1b;)">csch</option>
+<option data-key="insert" data-val="sinh(&#xa;)">sinh</option>
+<option data-key="insert" data-val="cosh(&#xa;)">cosh</option>
+<option data-key="insert" data-val="tanh(&#xa;)">tanh</option>
+<option data-key="insert" data-val="coth(&#xa;)">coth</option>
+<option data-key="insert" data-val="sech(&#xa;)">sech</option>
+<option data-key="insert" data-val="csch(&#xa;)">csch</option>
 </select></div>
 
-<button data-key="insert" data-val="log(&#x1b;)">log</button>
-<button data-key="insert" data-val="floor(&#x1b;)">floor</button>
-<button data-key="insert" data-val="ceil(&#x1b;)">ceil</button>
-<button data-key="insert" data-val="round(&#x1b;)">round</button>
-<button data-key="insert" data-val="fix(&#x1b;)">fix</button>
+<button data-key="insert" data-val="log(&#xa;)">log</button>
+<button data-key="insert" data-val="floor(&#xa;)">floor</button>
+<button data-key="insert" data-val="ceil(&#xa;)">ceil</button>
+<button data-key="insert" data-val="round(&#xa;)">round</button>
+<button data-key="insert" data-val="fix(&#xa;)">fix</button>
 
 <button data-key="insert" data-val="%">%</button>
-<button data-key="insert" data-val="gcd(&#x1b;,)">gcd</button>
-<button data-key="insert" data-val="xgcd(&#x1b;,)">xgcd</button>
-<button data-key="insert" data-val="lcm(&#x1b;,)">lcm</button>
-<button data-key="insert" data-val="isPrime(&#x1b;)">isPrime</button>
+<button data-key="insert" data-val="gcd(&#xa;,)">gcd</button>
+<button data-key="insert" data-val="xgcd(&#xa;,)">xgcd</button>
+<button data-key="insert" data-val="lcm(&#xa;,)">lcm</button>
+<button data-key="insert" data-val="isPrime(&#xa;)">isPrime</button>
 
-<button data-key="insert" data-val="conj(&#x1b;)">conj</button>
-<button data-key="insert" data-val="re(&#x1b;)">re</button>
-<button data-key="insert" data-val="im(&#x1b;)">im</button>
-<button data-key="insert" data-val="arg(&#x1b;)">arg</button>
+<button data-key="insert" data-val="conj(&#xa;)">conj</button>
+<button data-key="insert" data-val="re(&#xa;)">re</button>
+<button data-key="insert" data-val="im(&#xa;)">im</button>
+<button data-key="insert" data-val="arg(&#xa;)">arg</button>
 <button data-key="insert" data-val=",">,</button>
 </div>
 
@@ -150,51 +151,51 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="exec" data-val="clear" class="destructive">⌧</button>
 <button data-key="page" data-val="0" class="nav">↶</button>
 
-<button data-key="insert" data-val="sign(&#x1b;)">sign</button>
-<button data-key="insert" data-val="nthRoot(&#x1b;,)">nthRoot</button>
-<button data-key="insert" data-val="asin(&#x1b;)">asin</button>
+<button data-key="insert" data-val="sign(&#xa;)">sign</button>
+<button data-key="insert" data-val="nthRoot(&#xa;,)">nthRoot</button>
+<button data-key="insert" data-val="asin(&#xa;)">asin</button>
 <div class="select"><label for="select-acos">acos/…</label>
 <select id="select-acos"><option>acos/…</option>
-<option data-key="insert" data-val="asin(&#x1b;)">asin</option>
-<option data-key="insert" data-val="acos(&#x1b;)">acos</option>
-<option data-key="insert" data-val="atan(&#x1b;)">atan</option>
-<option data-key="insert" data-val="atan2(&#x1b;,)">atan2</option>
-<option data-key="insert" data-val="acot(&#x1b;)">acot</option>
-<option data-key="insert" data-val="asec(&#x1b;)">asec</option>
-<option data-key="insert" data-val="acsc(&#x1b;)">acsc</option>
+<option data-key="insert" data-val="asin(&#xa;)">asin</option>
+<option data-key="insert" data-val="acos(&#xa;)">acos</option>
+<option data-key="insert" data-val="atan(&#xa;)">atan</option>
+<option data-key="insert" data-val="atan2(&#xa;,)">atan2</option>
+<option data-key="insert" data-val="acot(&#xa;)">acot</option>
+<option data-key="insert" data-val="asec(&#xa;)">asec</option>
+<option data-key="insert" data-val="acsc(&#xa;)">acsc</option>
 </select></div>
 <div class="select"><label for="select-asinh">asinh/…</label>
 <select id="select-asinh"><option>asinh/…</option>
-<option data-key="insert" data-val="asinh(&#x1b;)">asinh</option>
-<option data-key="insert" data-val="acosh(&#x1b;)">acosh</option>
-<option data-key="insert" data-val="atanh(&#x1b;)">atanh</option>
-<option data-key="insert" data-val="acoth(&#x1b;)">acoth</option>
-<option data-key="insert" data-val="asech(&#x1b;)">asech</option>
-<option data-key="insert" data-val="acsch(&#x1b;)">acsch</option>
+<option data-key="insert" data-val="asinh(&#xa;)">asinh</option>
+<option data-key="insert" data-val="acosh(&#xa;)">acosh</option>
+<option data-key="insert" data-val="atanh(&#xa;)">atanh</option>
+<option data-key="insert" data-val="acoth(&#xa;)">acoth</option>
+<option data-key="insert" data-val="asech(&#xa;)">asech</option>
+<option data-key="insert" data-val="acsch(&#xa;)">acsch</option>
 </select></div>
 
-<button data-key="insert" data-val="exp(&#x1b;)">exp</button>
-<button data-key="insert" data-val="log10(&#x1b;)">log10</button>
-<button data-key="insert" data-val="square(&#x1b;)">square</button>
-<button data-key="insert" data-val="cube(&#x1b;)">cube</button>
-<button data-key="insert" data-val="cbrt(&#x1b;)">cbrt</button>
+<button data-key="insert" data-val="exp(&#xa;)">exp</button>
+<button data-key="insert" data-val="log10(&#xa;)">log10</button>
+<button data-key="insert" data-val="square(&#xa;)">square</button>
+<button data-key="insert" data-val="cube(&#xa;)">cube</button>
+<button data-key="insert" data-val="cbrt(&#xa;)">cbrt</button>
 
-<button data-key="insert" data-val="simplify(&quot;&#x1b;&quot;)">simplify</button>
-<button data-key="insert" data-val="derivative(&quot;&#x1b;&quot;,&quot;x&quot;)">deriv</button>
+<button data-key="insert" data-val="simplify(&quot;&#xa;&quot;)">simplify</button>
+<button data-key="insert" data-val="derivative(&quot;&#xa;&quot;,&quot;x&quot;)">deriv</button>
 <button data-key="insert" data-val="x">x</button>
 <div class="select"><label for="select-plot">plot…</label>
 <select id="select-plot"><option>plot…</option>
-<option data-key="insert" data-val="plotCartesian(&#x1b;, x, -10, 10)">plotCartesian</option>
-<option data-key="insert" data-val="plotPolar(&#x1b;, phi, -2pi, 2pi)">plotPolar</option>
-<option data-key="insert" data-val="plotParametric(&#x1b;, , t, 0, 10)">plotParametric</option>
+<option data-key="insert" data-val="plotCartesian(&#xa;, x, -10, 10)">plotCartesian</option>
+<option data-key="insert" data-val="plotPolar(&#xa;, phi, -2pi, 2pi)">plotPolar</option>
+<option data-key="insert" data-val="plotParametric(&#xa;, , t, 0, 10)">plotParametric</option>
 </select></div>
 <span>5</span>
 
-<button data-key="insert" data-val="fraction(&#x1b;)">fraction</button>
-<button data-key="insert" data-val="bignumber(&quot;&#x1b;&quot;)">big</button>
-<button data-key="insert" data-val="number(&quot;&#x1b;&quot;)">number</button>
+<button data-key="insert" data-val="fraction(&#xa;)">fraction</button>
+<button data-key="insert" data-val="bignumber(&quot;&#xa;&quot;)">big</button>
+<button data-key="insert" data-val="number(&quot;&#xa;&quot;)">number</button>
 <button data-key="insert" data-val="about()">about</button>
-<button data-key="insert" data-val="help(&quot;&#x1b;&quot;)">help</button>
+<button data-key="insert" data-val="help(&quot;&#xa;&quot;)">help</button>
 </div>
 
 <div class="keyboard-page"><!--4-->
@@ -204,44 +205,44 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="exec" data-val="del" class="destructive">⌫</button>
 <button data-key="page" data-val="0" class="nav">↶</button>
 
-<button data-key="insert" data-val="inv(&#x1b;)">inv</button>
-<button data-key="insert" data-val="det(&#x1b;)">det</button>
-<button data-key="insert" data-val="dot(&#x1b;,)">dot</button>
+<button data-key="insert" data-val="inv(&#xa;)">inv</button>
+<button data-key="insert" data-val="det(&#xa;)">det</button>
+<button data-key="insert" data-val="dot(&#xa;,)">dot</button>
 <button data-key="insert" data-val="[">[</button>
 <button data-key="insert" data-val="]">]</button>
 
-<button data-key="insert" data-val="eye(&#x1b;)">eye</button>
-<button data-key="insert" data-val="zeros(&#x1b;)">zeros</button>
-<button data-key="insert" data-val="kron(&#x1b;,)">kron</button>
+<button data-key="insert" data-val="eye(&#xa;)">eye</button>
+<button data-key="insert" data-val="zeros(&#xa;)">zeros</button>
+<button data-key="insert" data-val="kron(&#xa;,)">kron</button>
 <button data-key="insert" data-val=".^">.^</button>
 <button data-key="insert" data-val=",">,</button>
 
-<button data-key="insert" data-val="norm(&#x1b;,2)">norm</button>
-<button data-key="insert" data-val="hypot(&#x1b;)">hypot</button>
+<button data-key="insert" data-val="norm(&#xa;,2)">norm</button>
+<button data-key="insert" data-val="hypot(&#xa;)">hypot</button>
 <div class="select"><label for="select-lusolve">solve/…</label>
 <select id="select-lusolve"><option>lusolve/…</option>
-<option data-key="insert" data-val="lusolve(&#x1b;,)">lusolve</option>
-<option data-key="insert" data-val="lsolve(&#x1b;,)">lsolve</option>
-<option data-key="insert" data-val="usolve(&#x1b;,)">usolve</option>
-<option data-key="insert" data-val="lup(&#x1b;)">lup</option>
-<option data-key="insert" data-val="slu(&#x1b;,,)">slu</option>
-<option data-key="insert" data-val="qr(&#x1b;)">qr</option>
+<option data-key="insert" data-val="lusolve(&#xa;,)">lusolve</option>
+<option data-key="insert" data-val="lsolve(&#xa;,)">lsolve</option>
+<option data-key="insert" data-val="usolve(&#xa;,)">usolve</option>
+<option data-key="insert" data-val="lup(&#xa;)">lup</option>
+<option data-key="insert" data-val="slu(&#xa;,,)">slu</option>
+<option data-key="insert" data-val="qr(&#xa;)">qr</option>
 </select></div>
 <button data-key="insert" data-val=".*">.*</button>
 <button data-key="insert" data-val="./">./</button>
 
 <div class="select"><label for="select-set">set/…</label>
 <select id="select-set"><option>set/…</option>
-<option data-key="insert" data-val="setUnion(&#x1b;,)">setUnion</option>
-<option data-key="insert" data-val="setIntersect(&#x1b;,)">setIntersect</option>
-<option data-key="insert" data-val="setDifference(&#x1b;,)">setDifference</option>
-<option data-key="insert" data-val="setSymDifference(&#x1b;,)">setSymDifference</option>
-<option data-key="insert" data-val="setCartesian(&#x1b;,)">setCartesian</option>
-<option data-key="insert" data-val="setPowerset(&#x1b;)">setPowerset</option>
-<option data-key="insert" data-val="setSize(&#x1b;)">setSize</option>
-<option data-key="insert" data-val="setMultiplicity(&#x1b;,)">setMultiplicity</option>
-<option data-key="insert" data-val="setIsSubset(&#x1b;,)">setIsSubset</option>
-<option data-key="insert" data-val="setDistinct(&#x1b;)">setDistinct</option>
+<option data-key="insert" data-val="setUnion(&#xa;,)">setUnion</option>
+<option data-key="insert" data-val="setIntersect(&#xa;,)">setIntersect</option>
+<option data-key="insert" data-val="setDifference(&#xa;,)">setDifference</option>
+<option data-key="insert" data-val="setSymDifference(&#xa;,)">setSymDifference</option>
+<option data-key="insert" data-val="setCartesian(&#xa;,)">setCartesian</option>
+<option data-key="insert" data-val="setPowerset(&#xa;)">setPowerset</option>
+<option data-key="insert" data-val="setSize(&#xa;)">setSize</option>
+<option data-key="insert" data-val="setMultiplicity(&#xa;,)">setMultiplicity</option>
+<option data-key="insert" data-val="setIsSubset(&#xa;,)">setIsSubset</option>
+<option data-key="insert" data-val="setDistinct(&#xa;)">setDistinct</option>
 </select></div>
 <span>2</span>
 <span>3</span>
@@ -256,29 +257,29 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="exec" data-val="clear" class="destructive">⌧</button>
 <button data-key="page" data-val="0" class="nav">↶</button>
 
-<button data-key="insert" data-val="transpose(&#x1b;)">trnsps</button>
-<button data-key="insert" data-val="trace(&#x1b;)">trace</button>
-<button data-key="insert" data-val="cross(&#x1b;,)">cross</button>
-<button data-key="insert" data-val="range(&#x1b;,)">range</button>
-<button data-key="insert" data-val="partitionSelect(&#x1b;,)">prtnSlct</button>
+<button data-key="insert" data-val="transpose(&#xa;)">trnsps</button>
+<button data-key="insert" data-val="trace(&#xa;)">trace</button>
+<button data-key="insert" data-val="cross(&#xa;,)">cross</button>
+<button data-key="insert" data-val="range(&#xa;,)">range</button>
+<button data-key="insert" data-val="partitionSelect(&#xa;,)">prtnSlct</button>
 
-<button data-key="insert" data-val="diag(&#x1b;)">diag</button>
-<button data-key="insert" data-val="ones(&#x1b;,)">ones</button>
-<button data-key="insert" data-val="size(&#x1b;)">size</button>
-<button data-key="insert" data-val="resize(&#x1b;,)">resize</button>
-<button data-key="insert" data-val="reshape(&#x1b;,)">reshape</button>
+<button data-key="insert" data-val="diag(&#xa;)">diag</button>
+<button data-key="insert" data-val="ones(&#xa;,)">ones</button>
+<button data-key="insert" data-val="size(&#xa;)">size</button>
+<button data-key="insert" data-val="resize(&#xa;,)">resize</button>
+<button data-key="insert" data-val="reshape(&#xa;,)">reshape</button>
 
-<button data-key="insert" data-val="distance(&#x1b;)">distance</button>
-<button data-key="insert" data-val="intersect(&#x1b;,,)">intersect</button>
-<button data-key="insert" data-val="flatten(&#x1b;)">flatten</button>
-<button data-key="insert" data-val="squeeze(&#x1b;)">squeeze</button>
-<button data-key="insert" data-val="sort(&#x1b;)">sort</button>
+<button data-key="insert" data-val="distance(&#xa;)">distance</button>
+<button data-key="insert" data-val="intersect(&#xa;,,)">intersect</button>
+<button data-key="insert" data-val="flatten(&#xa;)">flatten</button>
+<button data-key="insert" data-val="squeeze(&#xa;)">squeeze</button>
+<button data-key="insert" data-val="sort(&#xa;)">sort</button>
 
-<button data-key="insert" data-val="concat(&#x1b;,)">concat</button>
-<button data-key="insert" data-val="subset(&#x1b;,)">subset</button>
-<button data-key="insert" data-val="filter(&#x1b;,)">filter</button>
-<button data-key="insert" data-val="map(&#x1b;,)">map</button>
-<button data-key="insert" data-val="forEach(&#x1b;,)">forEach</button>
+<button data-key="insert" data-val="concat(&#xa;,)">concat</button>
+<button data-key="insert" data-val="subset(&#xa;,)">subset</button>
+<button data-key="insert" data-val="filter(&#xa;,)">filter</button>
+<button data-key="insert" data-val="map(&#xa;,)">map</button>
+<button data-key="insert" data-val="forEach(&#xa;,)">forEach</button>
 </div>
 
 <div class="keyboard-page"><!--6-->
@@ -288,29 +289,29 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="exec" data-val="del" class="destructive">⌫</button>
 <button data-key="page" data-val="0" class="nav">↶</button>
 
-<button data-key="insert" data-val="mean(&#x1b;)">mean</button>
-<button data-key="insert" data-val="median(&#x1b;)">median</button>
-<button data-key="insert" data-val="quantileSeq(&#x1b;,)">qntlSeq</button>
-<button data-key="insert" data-val="var(&#x1b;)">var</button>
-<button data-key="insert" data-val="std(&#x1b;)">std</button>
+<button data-key="insert" data-val="mean(&#xa;)">mean</button>
+<button data-key="insert" data-val="median(&#xa;)">median</button>
+<button data-key="insert" data-val="quantileSeq(&#xa;,)">qntlSeq</button>
+<button data-key="insert" data-val="var(&#xa;)">var</button>
+<button data-key="insert" data-val="std(&#xa;)">std</button>
 
-<button data-key="insert" data-val="min(&#x1b;)">min</button>
-<button data-key="insert" data-val="max(&#x1b;)">max</button>
-<button data-key="insert" data-val="mad(&#x1b;)">mad</button>
-<button data-key="insert" data-val="mode(&#x1b;)">mode</button>
+<button data-key="insert" data-val="min(&#xa;)">min</button>
+<button data-key="insert" data-val="max(&#xa;)">max</button>
+<button data-key="insert" data-val="mad(&#xa;)">mad</button>
+<button data-key="insert" data-val="mode(&#xa;)">mode</button>
 <span>5</span>
 
-<button data-key="insert" data-val="sum(&#x1b;)">sum</button>
-<button data-key="insert" data-val="prod(&#x1b;)">prod</button>
+<button data-key="insert" data-val="sum(&#xa;)">sum</button>
+<button data-key="insert" data-val="prod(&#xa;)">prod</button>
 <button data-key="insert" data-val="random()">random</button>
-<button data-key="insert" data-val="randomInt(&#x1b;)">randInt</button>
-<button data-key="insert" data-val="pickRandom([&#x1b;,])">pickRnd</button>
+<button data-key="insert" data-val="randomInt(&#xa;)">randInt</button>
+<button data-key="insert" data-val="pickRandom([&#xa;,])">pickRnd</button>
 
 <button data-key="insert" data-val="!">!</button>
-<button data-key="insert" data-val="gamma(&#x1b;)">gamma</button>
-<button data-key="insert" data-val="combinations(&#x1b;,)">comb</button>
-<button data-key="insert" data-val="permutations(&#x1b;)">perm</button>
-<button data-key="insert" data-val="multinomial([&#x1b;,])">multnom</button>
+<button data-key="insert" data-val="gamma(&#xa;)">gamma</button>
+<button data-key="insert" data-val="combinations(&#xa;,)">comb</button>
+<button data-key="insert" data-val="permutations(&#xa;)">perm</button>
+<button data-key="insert" data-val="multinomial([&#xa;,])">multnom</button>
 </div>
 
 <div class="keyboard-page"><!--7-->
@@ -320,19 +321,19 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="exec" data-val="clear" class="destructive">⌧</button>
 <button data-key="page" data-val="0" class="nav">↶</button>
 
-<button data-key="insert" data-val="composition(&#x1b;,)">comp</button>
-<button data-key="insert" data-val="catalan(&#x1b;)">catalan</button>
-<button data-key="insert" data-val="bellNumbers(&#x1b;)">bell</button>
-<button data-key="insert" data-val="stirlingS2(&#x1b;,)">stirling</button>
+<button data-key="insert" data-val="composition(&#xa;,)">comp</button>
+<button data-key="insert" data-val="catalan(&#xa;)">catalan</button>
+<button data-key="insert" data-val="bellNumbers(&#xa;)">bell</button>
+<button data-key="insert" data-val="stirlingS2(&#xa;,)">stirling</button>
 <span>5</span>
 
-<button data-key="insert" data-val="kldivergence(&#x1b;,)">kldiverg</button>
+<button data-key="insert" data-val="kldivergence(&#xa;,)">kldiverg</button>
 <span>2</span>
 <span>3</span>
 <span>4</span>
 <span>5</span>
 
-<button data-key="insert" data-val="erf(&#x1b;)">erf</button>
+<button data-key="insert" data-val="erf(&#xa;)">erf</button>
 <span>2</span>
 <span>3</span>
 <span>4</span>
@@ -354,27 +355,27 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 
 <button data-key="insert" data-val="==">==</button>
 <button data-key="insert" data-val="!=">!=</button>
-<button data-key="insert" data-val="deepEqual(&#x1b;,)">deepEq</button>
+<button data-key="insert" data-val="deepEqual(&#xa;,)">deepEq</button>
 <button data-key="insert" data-val="&lt;">&lt;</button>
 <button data-key="insert" data-val="&gt;">&gt;</button>
 
 <button data-key="insert" data-val="&lt;=">&lt;=</button>
 <button data-key="insert" data-val="&gt;=">&gt;=</button>
-<button data-key="insert" data-val="compare(&#x1b;,)">compare</button>
+<button data-key="insert" data-val="compare(&#xa;,)">compare</button>
 <button data-key="insert" data-val=" or ">or</button>
 <button data-key="insert" data-val="not ">not</button>
 
 <div class="select"><label for="select-isFoo">isFoo/…</label>
 <select id="select-isFoo"><option>isFoo/…</option>
-<option data-key="insert" data-val="isPositive(&#x1b;)">isPositive</option>
-<option data-key="insert" data-val="isZero(&#x1b;)">isZero</option>
-<option data-key="insert" data-val="isNegative(&#x1b;)">isNegative</option>
-<option data-key="insert" data-val="isNumeric(&#x1b;)">isNumeric</option>
-<option data-key="insert" data-val="isInteger(&#x1b;)">isInteger</option>
-<option data-key="insert" data-val="isNaN(&#x1b;)">isNaN</option>
+<option data-key="insert" data-val="isPositive(&#xa;)">isPositive</option>
+<option data-key="insert" data-val="isZero(&#xa;)">isZero</option>
+<option data-key="insert" data-val="isNegative(&#xa;)">isNegative</option>
+<option data-key="insert" data-val="isNumeric(&#xa;)">isNumeric</option>
+<option data-key="insert" data-val="isInteger(&#xa;)">isInteger</option>
+<option data-key="insert" data-val="isNaN(&#xa;)">isNaN</option>
 </select></div>
-<button data-key="insert" data-val="typeof(&#x1b;)">typeof</button>
-<button data-key="insert" data-val="compareNatural(&#x1b;,)">compNat</button>
+<button data-key="insert" data-val="typeof(&#xa;)">typeof</button>
+<button data-key="insert" data-val="compareNatural(&#xa;,)">compNat</button>
 <button data-key="insert" data-val=" and ">and</button>
 <button data-key="insert" data-val=" xor ">xor</button>
 </div>
@@ -402,7 +403,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <span>2</span>
 <span>3</span>
 <button data-key="insert" data-val="&amp;">&amp;</button>
-<button data-key="insert" data-val="bitXor(&#x1b;,)">bitXor</button>
+<button data-key="insert" data-val="bitXor(&#xa;,)">bitXor</button>
 </div>
 
 <div class="keyboard-page"><!--10-->
@@ -827,5 +828,4 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 
 </div>
 </div>
-<script src="res/app.js"></script>
 </body></html>

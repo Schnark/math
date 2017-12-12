@@ -24,6 +24,9 @@ SOFTWARE.
 */
 
 /*global math*/
+/*jshint evil: true*///this isn't an eval
+//jscs:disable disallowYodaConditions
+//yes, I just should update jscs
 (function () {
 "use strict";
 

@@ -81,7 +81,7 @@ Keyboard.prototype.handleInput = function (data) {
 	var pos;
 	switch (data.key) {
 	case 'insert':
-		pos = data.val.indexOf('\u001b');
+		pos = data.val.indexOf('\n');
 		if (pos === -1) {
 			this.input.insert(data.val);
 		} else {

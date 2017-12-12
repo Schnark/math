@@ -1,8 +1,8 @@
 {
-	"version": "1.10",
+	"version": "1.11",
 	"name": "Calculator",
 	"description": "Scientific calculator",
-	"size": 187736,
+	"size": 187332,
 	"package_path": "http://localhost:8080/math.zip",
 	"icons": {
 		"128": "/res/icon-128.png",

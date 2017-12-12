@@ -1,4 +1,5 @@
 /*global math, Input, Keyboard*/
+/*jshint evil: true*///this isn't an eval
 (function () {
 "use strict";
 
