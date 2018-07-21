@@ -90,7 +90,9 @@ function help (topic) {
 				syntax: [
 					'updateCurrencies()'
 				],
-				description: 'Update exchange rates for currencies (using https://api.fixer.io)'
+				//jscs:disable maximumLineLength
+				description: 'Update exchange rates for currencies, also provides much more additional currencies. This requires online access and will be using floatrates.com.'
+				//jscs:enable maximumLineLength
 			},
 			ans: {
 				name: 'ans',

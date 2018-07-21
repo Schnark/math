@@ -1,5 +1,5 @@
 {
-	"version": "1.13",
+	"version": "1.14",
 	"name": "Calculator",
 	"description": "Scientific calculator",
 	"launch_path": "/index.html",

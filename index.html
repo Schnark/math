@@ -175,7 +175,13 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 </select></div>
 
 <button data-key="insert" data-val="exp(&#xa;)">exp</button>
-<button data-key="insert" data-val="log10(&#xa;)">log10</button>
+<div class="select"><label for="select-log10">log10/…</label>
+<select id="select-log10"><option>log10/…</option>
+<option data-key="insert" data-val="log10(&#xa;)">log10</option>
+<option data-key="insert" data-val="log2(&#xa;)">log2</option>
+<option data-key="insert" data-val="log1p(&#xa;)">log1p</option>
+<option data-key="insert" data-val="expm1(&#xa;)">expm1</option>
+</select></div>
 <button data-key="insert" data-val="square(&#xa;)">square</button>
 <button data-key="insert" data-val="cube(&#xa;)">cube</button>
 <button data-key="insert" data-val="cbrt(&#xa;)">cbrt</button>
@@ -211,7 +217,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="insert" data-val="[">[</button>
 <button data-key="insert" data-val="]">]</button>
 
-<button data-key="insert" data-val="eye(&#xa;)">eye</button>
+<button data-key="insert" data-val="identity(&#xa;)">identity</button>
 <button data-key="insert" data-val="zeros(&#xa;)">zeros</button>
 <button data-key="insert" data-val="kron(&#xa;,)">kron</button>
 <button data-key="insert" data-val=".^">.^</button>
@@ -219,6 +225,10 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 
 <button data-key="insert" data-val="norm(&#xa;,2)">norm</button>
 <button data-key="insert" data-val="hypot(&#xa;)">hypot</button>
+<button data-key="insert" data-val="sqrtm(&#xa;)">sqrtm</button>
+<button data-key="insert" data-val=".*">.*</button>
+<button data-key="insert" data-val="./">./</button>
+
 <div class="select"><label for="select-lusolve">solve/…</label>
 <select id="select-lusolve"><option>lusolve/…</option>
 <option data-key="insert" data-val="lusolve(&#xa;,)">lusolve</option>
@@ -228,9 +238,6 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="slu(&#xa;,,)">slu</option>
 <option data-key="insert" data-val="qr(&#xa;)">qr</option>
 </select></div>
-<button data-key="insert" data-val=".*">.*</button>
-<button data-key="insert" data-val="./">./</button>
-
 <div class="select"><label for="select-set">set/…</label>
 <select id="select-set"><option>set/…</option>
 <option data-key="insert" data-val="setUnion(&#xa;,)">setUnion</option>
@@ -244,7 +251,6 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="setIsSubset(&#xa;,)">setIsSubset</option>
 <option data-key="insert" data-val="setDistinct(&#xa;)">setDistinct</option>
 </select></div>
-<span>2</span>
 <span>3</span>
 <button data-key="insert" data-val=";">;</button>
 <button data-key="insert" data-val=":">:</button>
@@ -257,7 +263,11 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="exec" data-val="clear" class="destructive">⌧</button>
 <button data-key="page" data-val="0" class="nav">↶</button>
 
-<button data-key="insert" data-val="transpose(&#xa;)">trnsps</button>
+<div class="select"><label for="select-transpose">trnsps/…</label>
+<select id="select-transpose"><option>trnsps/…</option>
+<option data-key="insert" data-val="ctranspose(&#xa;)">ctranspose</option>
+<option data-key="insert" data-val="transpose(&#xa;)">transpose</option>
+</select></div>
 <button data-key="insert" data-val="trace(&#xa;)">trace</button>
 <button data-key="insert" data-val="cross(&#xa;,)">cross</button>
 <button data-key="insert" data-val="range(&#xa;,)">range</button>
@@ -375,7 +385,12 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="isNaN(&#xa;)">isNaN</option>
 </select></div>
 <button data-key="insert" data-val="typeof(&#xa;)">typeof</button>
-<button data-key="insert" data-val="compareNatural(&#xa;,)">compNat</button>
+<div class="select"><label for="select-comp">comp/…</label>
+<select id="select-comp"><option>comp/…</option>
+<option data-key="insert" data-val="compareNatural(&#xa;,)">compareNatural</option>
+<option data-key="insert" data-val="compareText(&#xa;,)">compareText</option>
+<option data-key="insert" data-val="equalText(&#xa;,)">equalText</option>
+</select></div>
 <button data-key="insert" data-val=" and ">and</button>
 <button data-key="insert" data-val=" xor ">xor</button>
 </div>

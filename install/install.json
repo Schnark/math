@@ -12,7 +12,15 @@
 		"screenshot3.png"
 	],
 	"desc": {
-		"en": ["This is an advanced calculator. It has an integrated virtual keyboard that allows you to enter complex formulas. It supports a great variety of scientific functions, unit conversion and other features."],
-		"de": ["Dies ist ein fortgeschrittener Taschenrechner. Er hat eine integrierte virtuelle Tastatur, die die Eingabe komplexer Formeln ermöglicht. Unterstützt wird eine Vielzahl wissenschaftlicher Funktionen, das Umrechnen von Einheiten und weitere Funktionen."]
+		"en": [
+			"This is an advanced calculator. It has an integrated virtual keyboard that allows you to enter complex formulas.",
+			"It supports a great variety of scientific functions, unit conversion, drawing graphs, and other features.",
+			"Note that the currency conversion uses cached data. When you are online, you can use the function <code>updateCurrencies()</code> to load current data from https://www.floatrates.com/daily/eur.json."
+		],
+		"de": [
+			"Dies ist ein fortgeschrittener Taschenrechner. Er hat eine integrierte virtuelle Tastatur, die die Eingabe komplexer Formeln ermöglicht.",
+			"Unterstützt wird eine Vielzahl wissenschaftlicher Funktionen, das Umrechnen von Einheiten, Zeichnen von Funktionsgraphen und weitere Funktionen.",
+			"Beachte, dass die Währungsumrechnung auf Daten aus dem Cache beruht. Wenn du online bist, kannst du die Funktion <code>updateCurrencies()</code> nutzen um aktuelle Daten von https://www.floatrates.com/daily/eur.json zu laden."
+		]
 	}
 }
