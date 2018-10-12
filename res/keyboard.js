@@ -31,6 +31,13 @@ Keyboard.prototype.onChange = function (e) {
 	e.target.selectedIndex = 0;
 };
 
+/*
+In an ideal world, we'd use keydown and e.key. But, alas, this isn't an ideal world.
+Firefox OS 2.0 does have e.key, but it will always be "Unidentified". Additionally,
+printable keys will fire keydown events without any information about the key.
+So we have to use keypress for those, even though other browsers don't fire keypress
+events for non-printable keys.
+*/
 Keyboard.prototype.onKey = function (e) {
 	if (e.charCode) {
 		this.input.insert(String.fromCharCode(e.charCode));
