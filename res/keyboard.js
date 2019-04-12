@@ -35,8 +35,8 @@ Keyboard.prototype.onChange = function (e) {
 In an ideal world, we'd use keydown and e.key. But, alas, this isn't an ideal world.
 Firefox OS 2.0 does have e.key, but it will always be "Unidentified". Additionally,
 printable keys will fire keydown events without any information about the key.
-So we have to use keypress for those, even though other browsers don't fire keypress
-events for non-printable keys.
+So we have to use keypress for those, even though this doesn't work in modern browsers
+for non-printable keys.
 */
 Keyboard.prototype.onKey = function (e) {
 	if (e.charCode) {
@@ -180,6 +180,9 @@ Keyboard.prototype.exec = function (command) {
 		this.input.setText('');
 		break;
 	case 'prev':
+		if (this.history.length === 0) {
+			return;
+		}
 		this.historyPointer--;
 		if (this.historyPointer < 0) {
 			this.historyPointer = this.history.length - 1;
@@ -187,6 +190,9 @@ Keyboard.prototype.exec = function (command) {
 		this.input.setText(this.history[this.historyPointer]);
 		break;
 	case 'next':
+		if (this.history.length === 0) {
+			return;
+		}
 		this.historyPointer++;
 		if (this.historyPointer >= this.history.length) {
 			this.historyPointer = 0;

@@ -285,11 +285,20 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="insert" data-val="squeeze(&#xa;)">squeeze</button>
 <button data-key="insert" data-val="sort(&#xa;)">sort</button>
 
+<div class="select"><label for="select-row">row/…</label>
+<select id="select-row"><option>row/…</option>
+<option data-key="insert" data-val="row(&#xa;,)">row</option>
+<option data-key="insert" data-val="column(&#xa;,)">column</option>
+</select></div>
 <button data-key="insert" data-val="concat(&#xa;,)">concat</button>
 <button data-key="insert" data-val="subset(&#xa;,)">subset</button>
 <button data-key="insert" data-val="filter(&#xa;,)">filter</button>
-<button data-key="insert" data-val="map(&#xa;,)">map</button>
-<button data-key="insert" data-val="forEach(&#xa;,)">forEach</button>
+<div class="select"><label for="select-map">map/…</label>
+<select id="select-map"><option>map/…</option>
+<option data-key="insert" data-val="map(&#xa;,)">map</option>
+<option data-key="insert" data-val="forEach(&#xa;,)">forEach</option>
+<!--<option data-key="insert" data-val="apply(&#xa;,,)">apply</option> TODO?-->
+</select></div>
 </div>
 
 <div class="keyboard-page"><!--6-->
