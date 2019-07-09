@@ -24,7 +24,6 @@ SOFTWARE.
 */
 
 /*global math*/
-/*jshint evil: true*///this isn't an eval
 //jscs:disable disallowYodaConditions
 //yes, I just should update jscs
 (function () {
@@ -254,25 +253,25 @@ function plotCartesian (fs, start, end, step) {
 
 plotCartesian.transform = function (args, _, scope) {
 	var variable, start, end, step, fnScope, fnCodes, fns;
-	if (args[1] instanceof math.expression.node.SymbolNode) {
+	if (args[1] instanceof math.SymbolNode) {
 		variable = args[1].name;
 	} else {
 		throw new Error('Second argument must be a symbol');
 	}
 
-	start = args[2].compile().eval(scope);
-	end = args[3].compile().eval(scope);
+	start = args[2].compile().evaluate(scope);
+	end = args[3].compile().evaluate(scope);
 	if (start >= end) {
 		throw new Error('Start must be smaller than end');
 	}
-	step = args[4] && args[4].compile().eval(scope);
+	step = args[4] && args[4].compile().evaluate(scope);
 	if (step && step <= 0) {
 		throw new Error('Step must be positive');
 	}
 
 	fnScope = Object.create(scope);
 
-	if (args[0] instanceof math.expression.node.ArrayNode) {
+	if (args[0] instanceof math.ArrayNode) {
 		fnCodes = [];
 		args[0].forEach(function (f) {
 			fnCodes.push(f.compile());
@@ -284,7 +283,7 @@ plotCartesian.transform = function (args, _, scope) {
 	fns = fnCodes.map(function (code) {
 		return function (x) {
 			fnScope[variable] = x;
-			return code.eval(fnScope);
+			return code.evaluate(fnScope);
 		};
 	});
 
@@ -301,25 +300,25 @@ function plotPolar (fs, start, end, step) {
 
 plotPolar.transform = function (args, _, scope) {
 	var variable, start, end, step, fnScope, fnCodes, fns;
-	if (args[1] instanceof math.expression.node.SymbolNode) {
+	if (args[1] instanceof math.SymbolNode) {
 		variable = args[1].name;
 	} else {
 		throw new Error('Second argument must be a symbol');
 	}
 
-	start = args[2].compile().eval(scope);
-	end = args[3].compile().eval(scope);
+	start = args[2].compile().evaluate(scope);
+	end = args[3].compile().evaluate(scope);
 	if (start >= end) {
 		throw new Error('Start must be smaller than end');
 	}
-	step = args[4] && args[4].compile().eval(scope);
+	step = args[4] && args[4].compile().evaluate(scope);
 	if (step && step <= 0) {
 		throw new Error('Step must be positive');
 	}
 
 	fnScope = Object.create(scope);
 
-	if (args[0] instanceof math.expression.node.ArrayNode) {
+	if (args[0] instanceof math.ArrayNode) {
 		fnCodes = [];
 		args[0].forEach(function (f) {
 			fnCodes.push(f.compile());
@@ -331,7 +330,7 @@ plotPolar.transform = function (args, _, scope) {
 	fns = fnCodes.map(function (code) {
 		return function (x) {
 			fnScope[variable] = x;
-			return code.eval(fnScope);
+			return code.evaluate(fnScope);
 		};
 	});
 
@@ -348,25 +347,25 @@ function plotParametric (fs, gs, start, end, step) {
 
 plotParametric.transform = function (args, _, scope) {
 	var variable, start, end, step, fnScope, fn1Codes, fn2Codes, fn1s, fn2s;
-	if (args[2] instanceof math.expression.node.SymbolNode) {
+	if (args[2] instanceof math.SymbolNode) {
 		variable = args[2].name;
 	} else {
 		throw new Error('Third argument must be a symbol');
 	}
 
-	start = args[3].compile().eval(scope);
-	end = args[4].compile().eval(scope);
+	start = args[3].compile().evaluate(scope);
+	end = args[4].compile().evaluate(scope);
 	if (start >= end) {
 		throw new Error('Start must be smaller than end');
 	}
-	step = args[5] && args[5].compile().eval(scope);
+	step = args[5] && args[5].compile().evaluate(scope);
 	if (step && step <= 0) {
 		throw new Error('Step must be positive');
 	}
 
 	fnScope = Object.create(scope);
 
-	if (args[0] instanceof math.expression.node.ArrayNode) {
+	if (args[0] instanceof math.ArrayNode) {
 		fn1Codes = [];
 		args[0].forEach(function (f) {
 			fn1Codes.push(f.compile());
@@ -378,11 +377,11 @@ plotParametric.transform = function (args, _, scope) {
 	fn1s = fn1Codes.map(function (code) {
 		return function (x) {
 			fnScope[variable] = x;
-			return code.eval(fnScope);
+			return code.evaluate(fnScope);
 		};
 	});
 
-	if (args[1] instanceof math.expression.node.ArrayNode) {
+	if (args[1] instanceof math.ArrayNode) {
 		fn2Codes = [];
 		args[1].forEach(function (f) {
 			fn2Codes.push(f.compile());
@@ -394,7 +393,7 @@ plotParametric.transform = function (args, _, scope) {
 	fn2s = fn2Codes.map(function (code) {
 		return function (x) {
 			fnScope[variable] = x;
-			return code.eval(fnScope);
+			return code.evaluate(fnScope);
 		};
 	});
 

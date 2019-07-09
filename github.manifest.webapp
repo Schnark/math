@@ -1,8 +1,8 @@
 {
-	"version": "1.17",
+	"version": "1.18",
 	"name": "Calculator",
 	"description": "Scientific calculator",
-	"size": 198485,
+	"size": 199585,
 	"package_path": "https://schnark.github.io/math/math.zip",
 	"icons": {
 		"128": "/res/icon-128.png",

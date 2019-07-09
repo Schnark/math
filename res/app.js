@@ -1,5 +1,4 @@
 /*global math, Input, Keyboard*/
-/*jshint evil: true*///this isn't an eval
 (function () {
 "use strict";
 
@@ -11,7 +10,7 @@ var parser = math.parser(),
 function evaluate (expr) {
 	var res;
 	try {
-		res = parser.eval(expr);
+		res = parser.evaluate(expr);
 		if (res === undefined) {
 			res = 'undefined';
 		} else if (!res.toHtml) {
