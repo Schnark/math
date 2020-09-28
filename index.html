@@ -276,13 +276,17 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="insert" data-val="diag(&#xa;)">diag</button>
 <button data-key="insert" data-val="ones(&#xa;,)">ones</button>
 <button data-key="insert" data-val="size(&#xa;)">size</button>
+<button data-key="insert" data-val="eigs(&#xa;)">eigs</button>
 <button data-key="insert" data-val="resize(&#xa;,)">resize</button>
-<button data-key="insert" data-val="reshape(&#xa;,)">reshape</button>
 
 <button data-key="insert" data-val="getMatrixDataType(&#xa;)">getMDT</button>
 <button data-key="insert" data-val="intersect(&#xa;,,)">intersect</button>
 <button data-key="insert" data-val="flatten(&#xa;)">flatten</button>
-<button data-key="insert" data-val="squeeze(&#xa;)">squeeze</button>
+<div class="select"><label for="select-squeeze">squeeze/…</label>
+<select id="select-squeeze"><option>squeeze/…</option>
+<option data-key="insert" data-val="squeeze(&#xa;)">squeeze</option>
+<option data-key="insert" data-val="reshape(&#xa;,)">reshape</option>
+</select></div>
 <button data-key="insert" data-val="sort(&#xa;)">sort</button>
 
 <div class="select"><label for="select-row">row/…</label>
@@ -321,16 +325,25 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <span>5</span>
 
 <button data-key="insert" data-val="sum(&#xa;)">sum</button>
+<button data-key="insert" data-val="diff(&#xa;)">diff</button>
 <button data-key="insert" data-val="prod(&#xa;)">prod</button>
-<button data-key="insert" data-val="random()">random</button>
-<button data-key="insert" data-val="randomInt(&#xa;)">randInt</button>
-<button data-key="insert" data-val="pickRandom([&#xa;,])">pickRnd</button>
+<div class="select"><label for="select-rand">rand/…</label>
+<select id="select-rand"><option>rand/…</option>
+<option data-key="insert" data-val="random()">random</button>
+<option data-key="insert" data-val="randomInt(&#xa;)">randomInt</option>
+<option data-key="insert" data-val="pickRandom([&#xa;,])">pickRandom</option>
+</select></div>
+<span>5</span>
 
 <button data-key="insert" data-val="!">!</button>
 <button data-key="insert" data-val="gamma(&#xa;)">gamma</button>
 <button data-key="insert" data-val="combinations(&#xa;,)">comb</button>
 <button data-key="insert" data-val="permutations(&#xa;)">perm</button>
-<button data-key="insert" data-val="multinomial([&#xa;,])">multnom</button>
+<div class="select"><label for="select-cmbrp">cmbRp/…</label>
+<select id="select-cmbrp"><option>cmbRp/…</option>
+<option data-key="insert" data-val="combinationsWithRep(&#xa;,)">combinationsWithRep</option>
+<option data-key="insert" data-val="multinomial([&#xa;,])">multinomial</option>
+</select></div>
 </div>
 
 <div class="keyboard-page"><!--7-->
