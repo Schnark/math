@@ -3,7 +3,7 @@
 "use strict";
 
 var PREFIX = 'math',
-	VERSION = '1.19',
+	VERSION = '1.20',
 	FILES = [
 		'index.html',
 		'res/app.css',

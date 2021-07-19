@@ -182,9 +182,15 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="log1p(&#xa;)">log1p</option>
 <option data-key="insert" data-val="expm1(&#xa;)">expm1</option>
 </select></div>
-<button data-key="insert" data-val="square(&#xa;)">square</button>
-<button data-key="insert" data-val="cube(&#xa;)">cube</button>
-<button data-key="insert" data-val="cbrt(&#xa;)">cbrt</button>
+<div class="select"><label for="select-square">square/…</label>
+<select id="select-square"><option>square/…</option>
+<option data-key="insert" data-val="square(&#xa;)">square</option>
+<option data-key="insert" data-val="cube(&#xa;)">cube</option>
+<option data-key="insert" data-val="cbrt(&#xa;)">cbrt</option>
+<option data-key="insert" data-val="nthRoots(&#xa;)">nthRoots</option>
+</select></div>
+<span>4</span>
+<span>5</span>
 
 <button data-key="insert" data-val="simplify(&quot;&#xa;&quot;)">simplify</button>
 <button data-key="insert" data-val="rationalize(&quot;&#xa;&quot;)">rat’lize</button>
@@ -230,10 +236,12 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="insert" data-val="./">./</button>
 
 <div class="select"><label for="select-lusolve">solve/…</label>
-<select id="select-lusolve"><option>lusolve/…</option>
+<select id="select-lusolve"><option>solve/…</option>
 <option data-key="insert" data-val="lusolve(&#xa;,)">lusolve</option>
 <option data-key="insert" data-val="lsolve(&#xa;,)">lsolve</option>
 <option data-key="insert" data-val="usolve(&#xa;,)">usolve</option>
+<option data-key="insert" data-val="lsolveAll(&#xa;,)">lsolveAll</option>
+<option data-key="insert" data-val="usolveAll(&#xa;,)">usolveAll</option>
 <option data-key="insert" data-val="lup(&#xa;)">lup</option>
 <option data-key="insert" data-val="slu(&#xa;,,)">slu</option>
 <option data-key="insert" data-val="qr(&#xa;)">qr</option>
@@ -275,33 +283,51 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 
 <button data-key="insert" data-val="diag(&#xa;)">diag</button>
 <button data-key="insert" data-val="ones(&#xa;,)">ones</button>
-<button data-key="insert" data-val="size(&#xa;)">size</button>
+<div class="select"><label for="select-size">size/…</label>
+<select id="select-size"><option>size/…</option>
+<option data-key="insert" data-val="size(&#xa;)">size</option>
+<option data-key="insert" data-val="count(&#xa;)">count</option>
+</select></div>
+<button data-key="insert" data-val="expm(&#xa;)">expm</button>
 <button data-key="insert" data-val="eigs(&#xa;)">eigs</button>
-<button data-key="insert" data-val="resize(&#xa;,)">resize</button>
 
 <button data-key="insert" data-val="getMatrixDataType(&#xa;)">getMDT</button>
 <button data-key="insert" data-val="intersect(&#xa;,,)">intersect</button>
-<button data-key="insert" data-val="flatten(&#xa;)">flatten</button>
+<div class="select"><label for="select-rotate">rotate/…</label>
+<select id="select-rotate"><option>rotate/…</option>
+<option data-key="insert" data-val="rotate([&#xa;,],)">rotate</option>
+<option data-key="insert" data-val="rotationMatrix(&#xa;)">rotationMatrix</option>
+</select></div>
 <div class="select"><label for="select-squeeze">squeeze/…</label>
 <select id="select-squeeze"><option>squeeze/…</option>
 <option data-key="insert" data-val="squeeze(&#xa;)">squeeze</option>
 <option data-key="insert" data-val="reshape(&#xa;,)">reshape</option>
+<option data-key="insert" data-val="flatten(&#xa;)">flatten</option>
 </select></div>
-<button data-key="insert" data-val="sort(&#xa;)">sort</button>
+<button data-key="insert" data-val="resize(&#xa;,)">resize</button>
 
 <div class="select"><label for="select-row">row/…</label>
 <select id="select-row"><option>row/…</option>
 <option data-key="insert" data-val="row(&#xa;,)">row</option>
 <option data-key="insert" data-val="column(&#xa;,)">column</option>
 </select></div>
-<button data-key="insert" data-val="concat(&#xa;,)">concat</button>
-<button data-key="insert" data-val="subset(&#xa;,)">subset</button>
-<button data-key="insert" data-val="filter(&#xa;,)">filter</button>
+<div class="select"><label for="select-concat">concat/…</label>
+<select id="select-concat"><option>concat/…</option>
+<option data-key="insert" data-val="concat(&#xa;,)">concat</option>
+<option data-key="insert" data-val="subset(&#xa;,)">subset</option>
+<option data-key="insert" data-val="filter(&#xa;,)">filter</option>
+</select></div>
+<div class="select"><label for="select-matrix-from">mtrxFrm…</label>
+<select id="select-matrix-from"><option>matrixFrom…</option>
+<option data-key="insert" data-val="matrixFromFunction([&#xa;],)">matrixFromFunction</option>
+<option data-key="insert" data-val="matrixFromRows(&#xa;,)">matrixFromRows</option>
+<option data-key="insert" data-val="matrixFromColumns(&#xa;,)">matrixFromColumns</option>
+</select></div>
+<button data-key="insert" data-val="sort(&#xa;)">sort</button>
 <div class="select"><label for="select-map">map/…</label>
 <select id="select-map"><option>map/…</option>
 <option data-key="insert" data-val="map(&#xa;,)">map</option>
 <option data-key="insert" data-val="forEach(&#xa;,)">forEach</option>
-<!--<option data-key="insert" data-val="apply(&#xa;,,)">apply</option> TODO?-->
 </select></div>
 </div>
 
@@ -425,7 +451,14 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <button data-key="exec" data-val="clear" class="destructive">⌧</button>
 <button data-key="page" data-val="0" class="nav">↶</button>
 
-<span>1</span>
+<div class="select"><label for="select-format">format/…</label>
+<select id="select-format"><option>format/…</option>
+<option data-key="insert" data-val="format(&#xa;)">format</option>
+<option data-key="insert" data-val="bin(&#xa;)">bin</option>
+<option data-key="insert" data-val="oct(&#xa;)">oct</option>
+<option data-key="insert" data-val="hex(&#xa;)">hex</option>
+<option data-key="insert" data-val="numeric(&#xa;)">numeric</option>
+</select></div>
 <span>2</span>
 <button data-key="insert" data-val="&gt;&gt;&gt;">&gt;&gt;&gt;</button>
 <button data-key="insert" data-val="&lt;&lt;">&lt;&lt;</button>
@@ -682,6 +715,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="dyn">dyn</option>
 <option data-key="insert" data-val="lbf">lbf</option>
 <option data-key="insert" data-val="kip">kip</option>
+<option data-key="insert" data-val="kgf">kgf</option>
 </select></div>
 <div class="select"><label for="select-energy">Energy</label>
 <select id="select-energy"><option>Energy</option>
@@ -760,7 +794,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="Zi">zebi</option>
 <option data-key="insert" data-val="Yi">yobi</option>
 </select></div>
-<span>4</span>
+<button data-key="insert" data-val="splitUnit(&#xa;,[])">split</button>
 <button data-key="insert" data-val=" to ">to</button>
 
 </div>
@@ -830,7 +864,6 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="molarMass">M_u</option>
 <option data-key="insert" data-val="molarMassC12">M(₁₂C)</option>
 <option data-key="insert" data-val="gravity">g_n</option>
-<option data-key="insert" data-val="atm">atm</option>
 </select></div>
 <div class="select"><label for="select-natural">Natural</label>
 <select id="select-natural"><option>Natural units</option>

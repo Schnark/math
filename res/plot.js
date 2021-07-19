@@ -269,7 +269,7 @@ plotCartesian.transform = function (args, _, scope) {
 		throw new Error('Step must be positive');
 	}
 
-	fnScope = Object.create(scope);
+	fnScope = scope;
 
 	if (args[0] instanceof math.ArrayNode) {
 		fnCodes = [];
@@ -282,7 +282,7 @@ plotCartesian.transform = function (args, _, scope) {
 
 	fns = fnCodes.map(function (code) {
 		return function (x) {
-			fnScope[variable] = x;
+			fnScope.set(variable, x);
 			return code.evaluate(fnScope);
 		};
 	});
@@ -316,7 +316,7 @@ plotPolar.transform = function (args, _, scope) {
 		throw new Error('Step must be positive');
 	}
 
-	fnScope = Object.create(scope);
+	fnScope = scope;
 
 	if (args[0] instanceof math.ArrayNode) {
 		fnCodes = [];
@@ -329,7 +329,7 @@ plotPolar.transform = function (args, _, scope) {
 
 	fns = fnCodes.map(function (code) {
 		return function (x) {
-			fnScope[variable] = x;
+			fnScope.set(variable, x);
 			return code.evaluate(fnScope);
 		};
 	});
@@ -363,7 +363,7 @@ plotParametric.transform = function (args, _, scope) {
 		throw new Error('Step must be positive');
 	}
 
-	fnScope = Object.create(scope);
+	fnScope = scope;
 
 	if (args[0] instanceof math.ArrayNode) {
 		fn1Codes = [];
@@ -376,7 +376,7 @@ plotParametric.transform = function (args, _, scope) {
 
 	fn1s = fn1Codes.map(function (code) {
 		return function (x) {
-			fnScope[variable] = x;
+			fnScope.set(variable, x);
 			return code.evaluate(fnScope);
 		};
 	});
@@ -392,7 +392,7 @@ plotParametric.transform = function (args, _, scope) {
 
 	fn2s = fn2Codes.map(function (code) {
 		return function (x) {
-			fnScope[variable] = x;
+			fnScope.set(variable, x);
 			return code.evaluate(fnScope);
 		};
 	});
