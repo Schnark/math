@@ -133,7 +133,11 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 
 <button data-key="insert" data-val="%">%</button>
 <button data-key="insert" data-val="gcd(&#xa;,)">gcd</button>
-<button data-key="insert" data-val="xgcd(&#xa;,)">xgcd</button>
+<div class="select"><label for="select-xgcd">xgcd/…</label>
+<select id="select-xgcd"><option>xgcd/…</option>
+<option data-key="insert" data-val="xgcd(&#xa;,)">xgcd</option>
+<option data-key="insert" data-val="invmod(&#xa;,)">invmod</option>
+</select></div>
 <button data-key="insert" data-val="lcm(&#xa;,)">lcm</button>
 <button data-key="insert" data-val="isPrime(&#xa;)">isPrime</button>
 
@@ -275,6 +279,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <select id="select-transpose"><option>trnsps/…</option>
 <option data-key="insert" data-val="ctranspose(&#xa;)">ctranspose</option>
 <option data-key="insert" data-val="transpose(&#xa;)">transpose</option>
+<option data-key="insert" data-val="pinv(&#xa;)">pinv</option>
 </select></div>
 <button data-key="insert" data-val="trace(&#xa;)">trace</button>
 <button data-key="insert" data-val="cross(&#xa;,)">cross</button>
@@ -351,6 +356,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <span>5</span>
 
 <button data-key="insert" data-val="sum(&#xa;)">sum</button>
+<button data-key="insert" data-val="cumsum(&#xa;)">cumsum</button>
 <button data-key="insert" data-val="diff(&#xa;)">diff</button>
 <button data-key="insert" data-val="prod(&#xa;)">prod</button>
 <div class="select"><label for="select-rand">rand/…</label>
@@ -359,10 +365,13 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="randomInt(&#xa;)">randomInt</option>
 <option data-key="insert" data-val="pickRandom([&#xa;,])">pickRandom</option>
 </select></div>
-<span>5</span>
 
 <button data-key="insert" data-val="!">!</button>
-<button data-key="insert" data-val="gamma(&#xa;)">gamma</button>
+<div class="select"><label for="select-gamma">gamma/…</label>
+<select id="select-gamma"><option>gamma/…</option>
+<option data-key="insert" data-val="gamma(&#xa;)">gamma</option>
+<option data-key="insert" data-val="lgamma(&#xa;)">lgamma</option>
+</select></div>
 <button data-key="insert" data-val="combinations(&#xa;,)">comb</button>
 <button data-key="insert" data-val="permutations(&#xa;)">perm</button>
 <div class="select"><label for="select-cmbrp">cmbRp/…</label>
@@ -439,6 +448,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <option data-key="insert" data-val="compareNatural(&#xa;,)">compareNatural</option>
 <option data-key="insert" data-val="compareText(&#xa;,)">compareText</option>
 <option data-key="insert" data-val="equalText(&#xa;,)">equalText</option>
+<option data-key="insert" data-val="symbolicEqual(&#xa;,)">symbolicEqual</option>
 </select></div>
 <button data-key="insert" data-val=" and ">and</button>
 <button data-key="insert" data-val=" xor ">xor</button>
