@@ -1,4 +1,5 @@
 /*global Keyboard: true*/
+/*global getKey, addKeyDownListener*/
 Keyboard =
 (function () {
 "use strict";
@@ -6,7 +7,7 @@ Keyboard =
 function Keyboard (el, input, callback) {
 	el.addEventListener('click', this.onClick.bind(this));
 	el.addEventListener('change', this.onChange.bind(this));
-	el.addEventListener('keypress', this.onKey.bind(this));
+	addKeyDownListener(el, this.onKey.bind(this));
 	this.pages = el.getElementsByClassName('keyboard-page');
 	this.input = input;
 	this.callback = callback;
@@ -31,54 +32,48 @@ Keyboard.prototype.onChange = function (e) {
 	e.target.selectedIndex = 0;
 };
 
-/*
-In an ideal world, we'd use keydown and e.key. But, alas, this isn't an ideal world.
-Firefox OS 2.0 does have e.key, but it will always be "Unidentified". Additionally,
-printable keys will fire keydown events without any information about the key.
-So we have to use keypress for those, even though this doesn't work in modern browsers
-for non-printable keys.
-*/
 Keyboard.prototype.onKey = function (e) {
-	if (e.charCode) {
-		this.input.insert(String.fromCharCode(e.charCode));
-	} else if (e.keyCode) {
-		switch (e.keyCode) {
-		case 8:
+	var key = getKey(e);
+	if (key.length === 1) {
+		this.input.insert(key);
+	} else {
+		switch (key) {
+		case 'Backspace':
 			this.exec('del');
 			break;
-		case 9:
+		case 'Tab':
 			this.showPage(0);
 			break;
-		case 13:
+		case 'Enter':
 			this.exec('enter');
 			break;
-		case 27:
+		case 'Escape':
 			this.exec('clear');
 			break;
-		case 33:
-		case 38:
+		case 'PageUp':
+		case 'ArrowUp':
 			this.exec('prev');
 			break;
-		case 34:
-		case 40:
+		case 'PageDown':
+		case 'ArrowDown':
 			this.exec('next');
 			break;
-		case 35:
+		case 'End':
 			this.input.moveCursor('end');
 			break;
-		case 36:
+		case 'Home':
 			this.input.moveCursor('start');
 			break;
-		case 37:
+		case 'ArrowLeft':
 			this.input.moveCursor('left');
 			break;
-		case 39:
+		case 'ArrowRight':
 			this.input.moveCursor('right');
 			break;
-		case 46:
+		case 'Delete':
 			this.exec('del-right');
 			break;
-		//default: console.log(e.keyCode);
+		//default: console.log(key);
 		}
 	}
 	e.preventDefault();

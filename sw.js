@@ -3,12 +3,13 @@
 "use strict";
 
 var PREFIX = 'math',
-	VERSION = '1.21',
+	VERSION = '1.22',
 	FILES = [
 		'index.html',
 		'res/app.css',
 		'res/app.js',
 		'res/currency.js',
+		'res/fixKeyboard.js',
 		'res/help.js',
 		'res/input.css',
 		'res/input.js',

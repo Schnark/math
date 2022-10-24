@@ -18,6 +18,7 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <link rel="stylesheet" href="res/app.css">
 <link rel="stylesheet" href="res/input.css">
 <link rel="stylesheet" href="res/keyboard.css">
+<script src="res/fixKeyboard.js" defer></script>
 <script src="res/input.js" defer></script>
 <script src="res/keyboard.js" defer></script>
 <script src="res/lib/math.min.js" defer></script>
@@ -406,7 +407,11 @@ if (navigator.serviceWorker && !(navigator.mozApps && navigator.mozApps.installP
 <span>4</span>
 <span>5</span>
 
-<span>1</span>
+<div class="select"><label for="select-fft">fft/…</label>
+<select id="select-fft"><option>fft/…</option>
+<option data-key="insert" data-val="fft([&#xa;])">fft</option>
+<option data-key="insert" data-val="ifft([&#xa;])">ifft</option>
+</select></div><!--doesn't really belong here, but this is the only place with available space-->
 <span>2</span>
 <span>3</span>
 <span>4</span>
